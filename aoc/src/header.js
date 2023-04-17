@@ -29,11 +29,29 @@ const header = () => {
           </span>
         </span>
       </a>
+
+      <a href="#" class="govuk-header__link govuk-header__service-name">
+        Home
+      </a>
+      <a href="#" class="govuk-header__link govuk-header__service-name">
+        About
+      </a>
+      <a href="#" class="govuk-header__link govuk-header__service-name">
+        Location
+      </a>
+      <a href="#" class="govuk-header__link govuk-header__service-name">
+        Contact Us
+      </a>
     </div>
     <div class="govuk-header__content">
-      <a href="#" class="govuk-header__link govuk-header__service-name">
-        AOC GP Surgery
-      </a>
+
+     
+      <button class="govuk-button" data-module="govuk-button">
+  Login
+</button>
+<button class="govuk-button" data-module="govuk-button">
+  Sign Up
+</button>
     </div>
   </div>
 </header>
