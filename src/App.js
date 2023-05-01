@@ -1,6 +1,5 @@
 import "./App.css";
-import "./styles.scss";
-import Header from "./header";
+
 import MainPage_ali from "./pages/MainPage_ali";
 import Deregister_ali from "./pages/deregister_ali";
 import Register_imran from "./pages/register_imran";
