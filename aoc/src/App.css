@@ -6,6 +6,54 @@
   height: 40vmin;
   pointer-events: none;
 }
+/* div.govuk-header__logo{
+  width: 50%;
+  display: flex;
+  justify-content: space-between;
+  margin-left: 0;
+  float: left;
+  
+}
+div.govuk-header__service-name{
+  display: inline-block;
+  MARGIN-INLINE: 80PX;
+}
+div.govuk-header__content{
+  display:inline-block;
+  position: absolute;
+  right: 0;
+  width: 20%;
+}
+div.govuk-button::before{
+margin: 0;
+padding: 0 5px;
+}
+div.govuk-header__container{
+  display: inline;
+  margin-inline: 20px;
+}
+div.govuk-header__link{
+  padding: 0 5px;
+} */
+
+div.govuk-header__container{
+  display: inline;
+  margin-inline: 10px;
+}
+div.govuk-header__logo{
+  width: 50%;
+  display: flex;
+  justify-content: space-between;
+  margin-left: 10;
+  float: left;
+}
+div.govuk-header__content {
+  width: 80.66%;
+  padding-left: 05px;
+  float: left;
+  right: 30;
+}
+
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
@@ -16,6 +64,7 @@
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
+  margin-right: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;

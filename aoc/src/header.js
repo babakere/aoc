@@ -1,5 +1,6 @@
 import React from 'react'
 
+
 const header = () => {
   return (
     <header class="govuk-header " role="banner" data-module="govuk-header">
@@ -30,7 +31,7 @@ const header = () => {
         </span>
       </a>
 
-      <a href="#" class="govuk-header__link govuk-header__service-name">
+      <a href="#" class="govuk-header__link govuk-header__service-name" >
         Home
       </a>
       <a href="#" class="govuk-header__link govuk-header__service-name">
@@ -42,16 +43,18 @@ const header = () => {
       <a href="#" class="govuk-header__link govuk-header__service-name">
         Contact Us
       </a>
+
+           
+      <button class="govuk-button govuk-header__service-name" data-module="govuk-button">
+  Login
+</button>
+<button class="govuk-button govuk-header__service-name" data-module="govuk-button">
+  Sign Up
+</button>
     </div>
     <div class="govuk-header__content">
 
-     
-      <button class="govuk-button" data-module="govuk-button">
-  Login
-</button>
-<button class="govuk-button" data-module="govuk-button">
-  Sign Up
-</button>
+
     </div>
   </div>
 </header>
