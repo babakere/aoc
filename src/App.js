@@ -9,24 +9,11 @@ import { Footer } from "govuk-react";
 import { Link } from "govuk-react";
 import Info from "./info";
 import { TopNav } from "govuk-react";
-
+import Header from "./header";
 function App() {
   return (
     <div className="App">
-      <Page
-        header={
-          <TopNav
-            children={
-              <div>
-                <Link href="about" class="blue">
-                  about
-                </Link>
-                <Link href="location">location</Link>
-              </div>
-            }
-          ></TopNav>
-        }
-      >
+      <Page header={<Header></Header>}>
         <Info></Info>
       </Page>
       <Footer></Footer>
