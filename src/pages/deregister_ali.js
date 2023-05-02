@@ -1,6 +1,6 @@
 import React from "react";
 
-function deregister_ali(){
+function Deregister(){
     return(
         <div>
             <h1> Deregister page</h1>
@@ -10,4 +10,4 @@ function deregister_ali(){
     );
 }
 
-export default deregister_ali;
+export default Deregister;

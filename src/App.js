@@ -1,19 +1,30 @@
 import "./App.css";
-
-import MainPage_ali from "./pages/MainPage_ali";
-import Deregister_ali from "./pages/deregister_ali";
-import Register_imran from "./pages/register_imran";
-import { Page } from "govuk-react";
-import { Footer } from "govuk-react";
-import { Link } from "govuk-react";
+import { Page,Footer } from "govuk-react";
+import Main from "./pages/MainPage_ali";
+import Deregister from "./pages/deregister_ali";
+import Register from "./pages/register_imran";
 import Info from "./info";
-import { TopNav } from "govuk-react";
+import Login from "./pages/secondLogin_evan";
+import {Routes,Route} from "react-router-dom"
+
 import Header from "./header";
+import LoginSelection from "./pages/loginpage_evan";
 function App() {
   return (
     <div className="App">
       <Page header={<Header></Header>}>
-        <Info></Info>
+        <Routes>
+      {/* Evans code */}
+          <Route path="/" element={<Info/>}/>
+          <Route path="/loginselection" element={<LoginSelection />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/main" element={<Main/>}/>
+          <Route path="/deregister" element={<Deregister />} />
+          <Route path="/register" element={<Register />} />
+
+
+        </Routes>
+
       </Page>
       <Footer></Footer>
     </div>
@@ -21,3 +32,10 @@ function App() {
 }
 
 export default App;
+
+
+/* import YourComponent from "./path/of/your/component";
+
+<Router>
+  <Route exact path="/insert/your/path/here" component={YourComponent} />
+</Router> */
