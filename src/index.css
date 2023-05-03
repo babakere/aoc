@@ -11,6 +11,31 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-.blue {
-  margin: 100px;
+.input {
+  width: 50%;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 10px;
+  
+  
+}
+.loginRadio{
+ width: 10%;
+ margin-right: auto;
+ margin-left: auto;
+ 
+ 
+}
+.checkBox{
+  position: relative;
+  padding-top: 10px;
+
+  padding-bottom: 10px;
+}
+.loginButton{
+  
+  width: auto;
+  display: inline;
+  margin-inline: 10px;
 }

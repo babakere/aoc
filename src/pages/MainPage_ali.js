@@ -1,6 +1,6 @@
 import React from "react";
 
-function MainPage_ali() {
+function Main() {
   return (
     <div>
       <p>
@@ -24,4 +24,4 @@ function MainPage_ali() {
   );
 }
 
-export default MainPage_ali;
+export default Main;
