@@ -14,6 +14,13 @@ const Header = () => {
         </TopNav.NavLink>
       }
     >
+
+      <TopNav.NavLink href="about">About</TopNav.NavLink>
+      <TopNav.NavLink href="location">Location</TopNav.NavLink>
+      <TopNav.NavLink href="loginselection">Login</TopNav.NavLink>
+      <TopNav.NavLink href="register">Register</TopNav.NavLink>
+      <TopNav.NavLink href="deregister">Deregister</TopNav.NavLink>
+
       {location.pathname != "/patientRecord" && (
         <>
           <TopNav.NavLink href="about">About</TopNav.NavLink>
@@ -27,6 +34,7 @@ const Header = () => {
           <TopNav.NavLink href="main">Home</TopNav.NavLink>
         </>
       )}
+
     </TopNav>
   );
 };

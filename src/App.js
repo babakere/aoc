@@ -17,10 +17,15 @@ import DoctorPat from "./pages/docPatientRecord_evan";
 import Edit from "./pages/editPatientPage_evan";
 
 
+
 import Header from "./header";
 import LoginSelection from "./pages/loginpage_evan";
+
+import MainPage from "./pages/MainPage_ali";
+
 import { createContext, useState } from "react";
 export const useContext = createContext();
+
 
 function App() {
 const [islogged, setIsLogged] = useState(
@@ -43,6 +48,7 @@ const [islogged, setIsLogged] = useState(
           <Route path="/login" element={<Login />} />
           <Route path="/main" element={<Main />} />
           <Route path="/deregister" element={<Deregister />} />
+          <Route path="/mainpage" element={< MainPage/>} />
           <Route path="/register" element={<Register />} />
 
           <Route path="/patientRecord" element={<PatientRecord />} />
