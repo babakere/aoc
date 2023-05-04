@@ -55,12 +55,11 @@ code {
   grid-template-columns: 50% 50%;
 }
 .p-record-cotainer > div {
-  width: 10vw;
+  width: 30vw;
   height: 10vh;
   padding: 1rem;
   margin: 1rem;
-  background-color: rgb(134, 134, 134);
 }
 div .p-details {
-  width: 40vw;
+  width: 70vw;
 }

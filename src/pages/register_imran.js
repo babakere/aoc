@@ -16,10 +16,10 @@ function Register() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const formData = {
       firstName,
       lastName,
+      //concat the birthdate
       birthDate,
       telNo,
       nhsNumber,
@@ -45,7 +45,11 @@ function Register() {
       console.error("Error:", error);
     }
   };
-
+  const handleDateFieldChange = (date) => {
+    const { day, month, year } = date;
+    const dateString = `${day}-${month}-${year}`;
+    setBirthDate(dateString);
+  };
   return (
     <div>
       <Heading>Register Page</Heading>
@@ -64,9 +68,19 @@ function Register() {
             >
               Last Name
             </InputField>
-            <DateField
+            {/* <DateField
               value={birthDate}
-              onChange={(e) => setBirthDate(e.target.value)}
+              onChange={(e) => handleDateFieldChange(e.target)}
+            ></DateField> */}
+            <DateField
+              input={{
+                value: {
+                  day: birthDate.split("-")[0],
+                  month: birthDate.split("-")[1],
+                  year: birthDate.split("-")[2],
+                },
+                onChange: handleDateFieldChange,
+              }}
             ></DateField>
             <InputField
               value={telNo}
