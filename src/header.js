@@ -14,6 +14,9 @@ const Header = () => {
           <Link href="loginselection" >
             Login
           </Link>
+          <Link href="Doctor">
+            doctor 
+          </Link>
          
         </div>
       }
