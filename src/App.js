@@ -7,8 +7,10 @@ import Info from "./info";
 import Login from "./pages/secondLogin_evan";
 import {Routes,Route} from "react-router-dom"
 
+
 import Header from "./header";
 import LoginSelection from "./pages/loginpage_evan";
+import MainPage from "./pages/MainPage_ali";
 function App() {
   return (
     <div className="App">
@@ -20,6 +22,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/main" element={<Main/>}/>
           <Route path="/deregister" element={<Deregister />} />
+          <Route path="/mainpage" element={< MainPage/>} />
           <Route path="/register" element={<Register />} />
 
 
