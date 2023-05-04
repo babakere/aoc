@@ -1,9 +1,35 @@
 import React from "react";
 import { Button } from "govuk-react";
 import { useNavigate } from "react-router-dom";
-import $ from "jquery"
+
 function LogoutButton() {
   const navigate = useNavigate();
+
+  const handleView = async (e) => {
+    e.preventDefault();
+    try {
+      const data = { pass: "evan" };
+      const params = new URLSearchParams(data).toString();
+  
+      const response = await fetch(`http://localhost:8000/doctor.php?${params}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+  
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+  
+      const result = await response.json();
+      alert(result.message);
+    } catch (error) {
+      console.error("Error:", error);
+      alert("An error occurred while fetching the data.");
+    }
+  }
+
 
   const handleLogout = () => {
     // $.ajax({
@@ -23,7 +49,7 @@ function LogoutButton() {
   };
 
   return (
-    <Button onClick={handleLogout}>Log Out</Button>
+    <Button onClick={handleView}>Log Out</Button>
   );
 }
 

@@ -18,7 +18,7 @@ function Edit() {
   };
   //block scope
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     let isFalse = false;
     Object.keys(patient).forEach((data) => {
@@ -29,9 +29,30 @@ function Edit() {
     if (isFalse) {
       return;
     }
-    console.log(patient)
-    //update
-    navigate("/doctor");
+
+    const params = patient.PatientID;
+
+    try {
+      const response = await fetch(
+        `http://localhost:8000/patients.php?${params}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(patient),
+        }
+      );
+      if (response.ok) {
+        const result = await response.json();
+        console.log(result)
+        navigate("/doctor");
+      } else {
+        console.log('Response status', response.status);
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
  
 
@@ -60,7 +81,7 @@ function Edit() {
               </React.Fragment>
 
         ))}
-        <Button className="Button" type="submit">
+        <Button className="Button" type="submit" onClick={handleSubmit}>
           Save
         </Button>
         <Button className="Button" type="button" onClick={() => back(-1)}>Back</Button>
