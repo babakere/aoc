@@ -48,18 +48,7 @@ code {
 .patient-record-page {
   height: 70vh;
 }
-.p-record-cotainer {
-  height: 70vh;
-  box-sizing: border-box;
-  display: grid;
-  grid-template-columns: 50% 50%;
-}
-.p-record-cotainer > div {
-  width: 30vw;
-  height: 10vh;
-  padding: 1rem;
-  margin: 1rem;
-}
+
 div .p-details {
   width: 70vw;
 }
