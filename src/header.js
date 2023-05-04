@@ -15,6 +15,7 @@ const Header = () => {
       <TopNav.NavLink href="location">Location</TopNav.NavLink>
       <TopNav.NavLink href="loginselection">Login</TopNav.NavLink>
       <TopNav.NavLink href="register">Register</TopNav.NavLink>
+      <TopNav.NavLink href="deregister">Deregister</TopNav.NavLink>
     </TopNav>
   );
 };

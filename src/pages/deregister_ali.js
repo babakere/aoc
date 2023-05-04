@@ -1,20 +1,31 @@
 import React from "react";
 // import ButtonToTop from "./backToTop";
-import { InputField } from "govuk-react";
+import { InputField, Button } from "govuk-react";
 
-function deregister_ali(){
+function deregister(){
+    const handleAjax = () =>{
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:8000/server.php",
+            data: { name: "wigfblrwihebfihewr" },
+            success(data) {
+                console.log(data);
+            },
+        });
+    }
+
+    
     return(
         <div>
             <h1> De-Register page</h1>
             <p>Please confirm your details to de-register
             <br/>yourself from AOC Surgery
             </p>
-            <InputField>NHS NUmber</InputField>
-            <InputField>Full Name</InputField>
-            <button class= "govuk-button" data-module = "govuk-button"> De-register</button>
+ 
+            <Button class= "govuk-button" onClick={handleAjax} data-module = "govuk-button"> De-register</Button>
 {/* <ButtonToTop>top</ButtonToTop> */}
         </div>
     );
 }
 
-export default deregister_ali;
+export default deregister;
