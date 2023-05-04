@@ -12,10 +12,8 @@ code {
     monospace;
 }
 .input {
-  width: 50%;
+  width: 75%;
   margin-top: 20px;
-  margin-left: auto;
-  margin-right: auto;
   padding-bottom: 10px;
 }
 .loginRadio {
@@ -29,11 +27,35 @@ code {
 
   padding-bottom: 10px;
 }
+
 .loginButton {
+width: auto;
+  display: inline;
+  margin-inline: 10px;
+ 
+}
+
+Button{
+  
+
   width: auto;
   display: inline;
   margin-inline: 10px;
+ 
 }
+
+
+
+.view{
+  display: block;
+  text-align: justify;
+  margin-block: 10px;
+  padding: 10px;
+}
+.pages{
+  min-height: calc(100vh - 111px)
+}
+
 .input-container {
   box-sizing: border-box;
   display: grid;
@@ -52,3 +74,12 @@ code {
 div .p-details {
   width: 70vw;
 }
+
+
+
+
+.errorMessage{
+  padding-bottom: 20px;
+}
+
+
