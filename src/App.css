@@ -1,46 +1,11 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-/* div.govuk-header__logo{
-  width: 50%;
-  display: flex;
-  justify-content: space-between;
-  margin-left: 0;
-  float: left;
-  
-}
-div.govuk-header__service-name{
-  display: inline-block;
-  MARGIN-INLINE: 80PX;
-}
-div.govuk-header__content{
-  display:inline-block;
-  position: absolute;
-  right: 0;
-  width: 20%;
-}
-div.govuk-button::before{
-margin: 0;
-padding: 0 5px;
-}
-div.govuk-header__container{
-  display: inline;
-  margin-inline: 20px;
-}
-div.govuk-header__link{
+div.govuk-header__link {
   padding: 0 5px;
-} */
-
-div.govuk-header__container{
+}
+*/ div.govuk-header__container {
   display: inline;
   margin-inline: 10px;
 }
-div.govuk-header__logo{
+div.govuk-header__logo {
   width: 50%;
   display: flex;
   justify-content: space-between;
@@ -53,7 +18,6 @@ div.govuk-header__content {
   float: left;
   right: 30;
 }
-
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {

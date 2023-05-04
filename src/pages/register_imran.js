@@ -1,9 +1,137 @@
-import React from "react";
+import React, { useState, useRef } from "react";
+import InputField from "@govuk-react/input-field";
+import DateField from "@govuk-react/date-field";
+import { Button, Heading } from "govuk-react";
+
+function Register() {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [birthDate, setBirthDate] = useState("");
+  const [telNo, setTelNo] = useState("");
+  const [nhsNumber, setNhsNumber] = useState("");
+  const [address, setAddress] = useState("");
+  const [gender, setGender] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const formData = {
+      firstName,
+      lastName,
+      birthDate,
+      telNo,
+      nhsNumber,
+      address,
+      gender,
+      email,
+      password,
+    };
+
+    console.log("Form Data:", formData);
+    try {
+      const response = await fetch("http://localhost:8000/register.php", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await response.json();
+      alert(result.message);
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
+  return (
+    <div>
+      <Heading>Register Page</Heading>
+      <form onSubmit={handleSubmit}>
+        <div className="input-container">
+          <div className="reg-left">
+            <InputField
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+            >
+              First Name
+            </InputField>
+            <InputField
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+            >
+              Last Name
+            </InputField>
+            <DateField
+              value={birthDate}
+              onChange={(e) => setBirthDate(e.target.value)}
+            ></DateField>
+            <InputField
+              value={telNo}
+              onChange={(e) => setTelNo(e.target.value)}
+            >
+              Tel No
+            </InputField>
+            <InputField
+              value={nhsNumber}
+              onChange={(e) => setNhsNumber(e.target.value)}
+            >
+              NHS Number
+            </InputField>
+          </div>
+          <div className="reg-right">
+            <InputField
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+            >
+              Address
+            </InputField>
+            <InputField
+              value={gender}
+              onChange={(e) => setGender(e.target.value)}
+            >
+              Gender
+            </InputField>
+            <InputField
+              value={email}
+              input={{
+                autoComplete: "email",
+                name: "group1",
+                type: "email",
+              }}
+              onChange={(e) => setEmail(e.target.value)}
+            >
+              Email
+            </InputField>
+            <InputField
+              value={password}
+              input={{
+                autoComplete: "new-password",
+                name: "group1",
+                type: "password",
+              }}
+              onChange={(e) => setPassword(e.target.value)}
+            >
+              Password
+            </InputField>
+          </div>
+        </div>
+        <Button type="submit">Submit</Button>
+      </form>
+    </div>
+  );
+}
+
+export default Register;
+
+/* import React from "react";
 import Header from "../header";
 import InputField from "@govuk-react/input-field";
 import DateField from "@govuk-react/date-field";
 import { Button, Heading } from "govuk-react";
-import FileUpload from "@govuk-react/file-upload";
+
 function Register() {
   <Header></Header>;
   return (
@@ -24,7 +152,6 @@ function Register() {
           >
             Tel No
           </InputField>
-          <FileUpload>Upload Photo</FileUpload>
         </div>
         <div className="reg-right">
           <InputField>Address</InputField>
@@ -49,3 +176,4 @@ function Register() {
 }
 
 export default Register;
+ */
