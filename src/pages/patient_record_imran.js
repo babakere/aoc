@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Button, Heading, Table } from "govuk-react";
+import { Button, Heading, Table, Link, Input } from "govuk-react";
 
 function PatientRecord() {
   const [patientDetails, setPatientDetails] = useState({});
   const [vaccineRecords, setVaccineRecords] = useState([]);
+  const [editing, setEditing] = useState({});
 
   useEffect(() => {
     const email = localStorage.getItem("email");
@@ -29,6 +30,38 @@ function PatientRecord() {
       });
   }, []);
 
+  function updatePatientDetails(email, fieldName, fieldValue) {
+    const updatedDetails = {
+      ...patientDetails,
+      [fieldName]: fieldValue,
+    };
+
+    fetch("http://localhost:8000/updatePatient.php", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ ...updatedDetails, Email: email }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        setPatientDetails(updatedDetails);
+      });
+  }
+
+  const startEditing = (field) => {
+    setEditing({ ...editing, [field]: true });
+  };
+
+  const stopEditing = (field) => {
+    setEditing({ ...editing, [field]: false });
+  };
+
+  const handleInputChange = (event, field) => {
+    setPatientDetails({ ...patientDetails, [field]: event.target.value });
+  };
+
   return (
     <div className="patient-record-page">
       <Heading>Patient Record</Heading>
@@ -40,11 +73,65 @@ function PatientRecord() {
           </Table.Row>
           <Table.Row>
             <Table.CellHeader>Forename</Table.CellHeader>
-            <Table.Cell>{patientDetails.Name}</Table.Cell>
+            <Table.Cell>
+              {editing.Name ? (
+                <Input
+                  value={patientDetails.Name}
+                  onChange={(e) => handleInputChange(e, "Name")}
+                />
+              ) : (
+                patientDetails.Name
+              )}
+            </Table.Cell>
+            <Table.Cell>
+              {editing.Name ? (
+                <Button
+                  onClick={() => {
+                    stopEditing("Name");
+                    updatePatientDetails(
+                      patientDetails.Email,
+                      "Name",
+                      patientDetails.Name
+                    );
+                  }}
+                >
+                  Update
+                </Button>
+              ) : (
+                <Link onClick={() => startEditing("Name")}>Edit</Link>
+              )}
+            </Table.Cell>
           </Table.Row>
           <Table.Row>
             <Table.CellHeader>Surname</Table.CellHeader>
-            <Table.Cell>{patientDetails.Surname}</Table.Cell>
+            <Table.Cell>
+              {editing.Surname ? (
+                <Input
+                  value={patientDetails.Surname}
+                  onChange={(e) => handleInputChange(e, "Surname")}
+                />
+              ) : (
+                patientDetails.Surname
+              )}
+            </Table.Cell>
+            <Table.Cell style={{ width: "5vw" }}>
+              {editing.Surname ? (
+                <Button
+                  onClick={() => {
+                    stopEditing("Surname");
+                    updatePatientDetails(
+                      patientDetails.Email,
+                      "Surname",
+                      patientDetails.Surname
+                    );
+                  }}
+                >
+                  Update
+                </Button>
+              ) : (
+                <Link onClick={() => startEditing("Surname")}>Edit</Link>
+              )}
+            </Table.Cell>
           </Table.Row>
           <Table.Row>
             <Table.CellHeader>Date of Birth</Table.CellHeader>
@@ -79,69 +166,8 @@ function PatientRecord() {
           </Table>
         </div>
       </div>
-
-      <Button>Update Records</Button>
     </div>
   );
 }
 
 export default PatientRecord;
-
-/* import React from "react";
-import { Button, Heading, Table, InsetText } from "govuk-react";
-function PatientRecord() {
-  return (
-    <div className="patient-record-page">
-      <Heading>Patient Record</Heading>
-      <div className="p-details">
-        <Table caption="Patient Details">
-          <Table.Row>
-            <Table.CellHeader>NHS Number</Table.CellHeader>
-            <Table.Cell>012023</Table.Cell>
-          </Table.Row>
-          <Table.Row>
-            <Table.CellHeader>Forename</Table.CellHeader>
-            <Table.Cell>James</Table.Cell>
-          </Table.Row>
-          <Table.Row>
-            <Table.CellHeader>Surname</Table.CellHeader>
-            <Table.Cell>McCartney</Table.Cell>
-          </Table.Row>
-          <Table.Row>
-            <Table.CellHeader>Date of Birth</Table.CellHeader>
-            <Table.Cell>12/12/1928</Table.Cell>
-          </Table.Row>
-          <Table.Row>
-            <Table.CellHeader>Gender</Table.CellHeader>
-            <Table.Cell>Male</Table.Cell>
-          </Table.Row>
-          <Table.Row>
-            <Table.CellHeader>Tel No</Table.CellHeader>
-            <Table.Cell>072372323</Table.Cell>
-          </Table.Row>
-        </Table>
-
-        <div className="p-vacc-record">
-          <Table caption="Vaccine Records">
-            <Table.Row>
-              <Table.CellHeader>Date of Vaccine</Table.CellHeader>
-              <Table.Cell>
-                Vaccine details,Vaccine details,Vaccine details
-              </Table.Cell>
-            </Table.Row>
-            <Table.Row>
-              <Table.CellHeader>Date of Vaccine</Table.CellHeader>
-              <Table.Cell>
-                Vaccine details,Vaccine details,Vaccine details
-              </Table.Cell>
-            </Table.Row>
-          </Table>
-        </div>
-      </div>
-
-      <Button>Update Records</Button>
-    </div>
-  );
-}
-export default PatientRecord;
- */
