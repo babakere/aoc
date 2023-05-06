@@ -1,22 +1,32 @@
 import React, { useState, useEffect } from "react";
-import { Button, Heading, Table, InsetText } from "govuk-react";
+import { Button, Heading, Table } from "govuk-react";
 
 function PatientRecord() {
   const [patientDetails, setPatientDetails] = useState({});
   const [vaccineRecords, setVaccineRecords] = useState([]);
 
   useEffect(() => {
-    const NHSNumber = 94627903611; // Replace this with the desired NHSNumber
+    const email = localStorage.getItem("email");
 
     // Fetch patient details
-    fetch(`http://localhost:8000/getPatientDetails.php?NHSNumber=${NHSNumber}`)
+    fetch(`http://localhost:8000/getPatientDetails.php?email=${email}`)
       .then((response) => response.json())
-      .then((data) => setPatientDetails(data));
+      .then((data) => {
+        setPatientDetails(data);
 
-    // Fetch vaccine records
-    fetch(`http://localhost:8000/getVaccineRecords.php?NHSNumber=${NHSNumber}`)
-      .then((response) => response.json())
-      .then((data) => setVaccineRecords(data));
+        // Fetch vaccine records using the retrieved NHS number
+        fetch(
+          `http://localhost:8000/getVaccineRecords.php?NHSNumber=${data.NHSNumber}`
+        )
+          .then((response) => response.json())
+          .then((data) => {
+            if (Array.isArray(data)) {
+              setVaccineRecords(data);
+            } else {
+              setVaccineRecords([]);
+            }
+          });
+      });
   }, []);
 
   return (
