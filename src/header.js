@@ -7,12 +7,14 @@ const Header = () => {
   const location = useLocation();
   return (
     <TopNav
+
       company={
         <TopNav.Anchor href="/main" target="new">
           <TopNav.IconTitle icon={<SearchIcon height="32" width="36" />}>
             GOV.UK
           </TopNav.IconTitle>
         </TopNav.Anchor>
+
       }
       serviceTitle={
         <TopNav.NavLink href="/main" target="new">

@@ -11,7 +11,7 @@ function Login() {
   const handleLogin = async () => {
     localStorage.setItem("email", email); // Save email in local storage
 
-    const response = await fetch("http://localhost:8000/user.php/login", {
+    const response = await fetch("http://localhost:8000/user.php/login ", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

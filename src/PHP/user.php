@@ -5,8 +5,11 @@ header("Access-Control-Allow-Headers: *");
 header("Access-Control-Allow-Methods: *");
 header("Content-Type: application/json");
 
+
 try {
-    $pdo = new PDO("sqlite:/Users/ImranBary/AOC.db");
+
+    $pdo = new PDO("sqlite:AOC.db");
+
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
     echo json_encode(["message" => "Connection failed: " . $e->getMessage()]);
@@ -37,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     if ($stmt->execute()) {
                         $user = $stmt->fetch(PDO::FETCH_ASSOC);
                         if ($user) {
-                            $query = "SELECT Email as email, StaffID FROM Doctor WHERE StaffID = :staffid";
+                            $query = "SELECT *  FROM Doctor WHERE StaffID = :staffid";
                             $stmt = $pdo->prepare($query);
                             $stmt->bindParam(':staffid', $user["StaffID"]);
                             if ($stmt->execute()) {
