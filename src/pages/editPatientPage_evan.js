@@ -5,8 +5,8 @@ import { useState } from "react";
 
 function Edit() {
     const {state}= useLocation();
-    const [patient, setPatient] =useState(state);
-
+    const [patient, setPatient] = useState(state);
+console.log(patient)
     const navigate = useNavigate();
     const back = (a) => {
     navigate(a);
@@ -34,7 +34,7 @@ function Edit() {
 
     try {
       const response = await fetch(
-        `http://localhost:8000/patients.php?${params}`,
+        `http://localhost:8000/patients.php?PatientId=${params}`,
         {
           method: "PATCH",
           headers: {
@@ -52,6 +52,7 @@ function Edit() {
       }
     } catch (err) {
       console.log(err);
+      console.log(patient)
     }
   };
  

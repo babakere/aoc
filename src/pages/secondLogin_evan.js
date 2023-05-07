@@ -10,6 +10,7 @@ function Login() {
 
   const handleLogin = async () => {
     localStorage.setItem("email", email); // Save email in local storage
+
     const response = await fetch("http://localhost:8000/user.php/login", {
       method: "POST",
       headers: {
@@ -34,6 +35,7 @@ function Login() {
   return (
     <div className="input">
       <H2> Welcome Back to AOC Surgery </H2>
+
       <InputField className="input" onChange={(e) => setEmail(e.target.value)}>
         Email
       </InputField>
