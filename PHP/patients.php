@@ -5,7 +5,7 @@ header("Access-Control-Allow-Methods: *");
 header("Content-Type: application/json");
 
 try {
-    $pdo = new PDO("sqlite:/Users/evan/Documents/AOCdatabase/AOC.db");
+    $pdo = new PDO("sqlite:/Users/evan/Downloads/AOC.db");
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
     echo json_encode(["message" => "Connection failed: " . $e->getMessage()]);
@@ -13,19 +13,22 @@ try {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'PATCH') {
+
     try {
 
         $data = json_decode(file_get_contents("php://input"), true);
-        $patientId = $_GET['patientId'];
+        $patientId = $_GET['PatientId'];
 
         $query = "UPDATE Patient SET Name = :name, Surname = :surname, Email = :email, Address = :address WHERE PatientID = :patientId";
+        //changing the database
         $stmt = $pdo->prepare($query);
 
-        $stmt->bindParam(':name', $data['name']);
-        $stmt->bindParam(':surname', $data['surname']);
-        $stmt->bindParam(':email', $data['email']);
-        $stmt->bindParam(':address', $data['address']);
         $stmt->bindParam(':patientId', $patientId);
+        $stmt->bindParam(':name', $data['Name']);
+        $stmt->bindParam(':surname', $data['Surname']);
+        $stmt->bindParam(':email', $data['Email']);
+        $stmt->bindParam(':address', $data['Address']);
+
 
         if ($stmt->execute()) {
             echo json_encode(["message" => "Patient record updated successfully."]);
@@ -55,10 +58,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'PATCH') {
         $query = "INSERT INTO Patient (Name, Surname, Email, Address) VALUES (:name, :surname, :email, :address)";
         $stmt = $pdo->prepare($query);
 
-        $stmt->bindParam(':name', $data['name']);
-        $stmt->bindParam(':surname', $data['surname']);
-        $stmt->bindParam(':email', $data['email']);
-        $stmt->bindParam(':address', $data['address']);
+        $stmt->bindParam(':name', $data['Name']);
+        $stmt->bindParam(':surname', $data['Surname']);
+        $stmt->bindParam(':email', $data['Email']);
+        $stmt->bindParam(':address', $data['Address']);
 
         if ($stmt->execute()) {
             $patientId = $pdo->lastInsertId();
@@ -67,6 +70,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'PATCH') {
             echo json_encode(["message" => "Failed to create patient record."]);
         }
     } catch (PDOException $e) {
-        echo json_encode(["message" => $e]);
+        echo json_encode(["message" => $e->getMessage()]);
     }
 }
