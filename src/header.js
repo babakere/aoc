@@ -37,9 +37,9 @@ const Header = () => {
             <TopNav.NavLink href="register" style={{ margin: "3%" }}>
               Register{" "}
             </TopNav.NavLink>
-            <TopNav.NavLink href="deregister" style={{ margin: "3%" }}>
+            {/* <TopNav.NavLink href="deregister" style={{ margin: "3%" }}>
               Deregister
-            </TopNav.NavLink>
+            </TopNav.NavLink> */}
           </div>
         </>
       )}

@@ -1,46 +1,39 @@
-
 <?php
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: *");
 header("Access-Control-Allow-Methods: *");
 header("Content-Type: application/json");
 
-
 try {
-
     $pdo = new PDO("sqlite:AOC.db");
-
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
     echo json_encode(["message" => "Connection failed: " . $e->getMessage()]);
     exit();
 }
 
-
-
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($_SERVER['REQUEST_URI'] === '/user.php/login') {
         try {
             $data = json_decode(file_get_contents("php://input"), true);
 
-            $query = "SELECT Email as email FROM Patient WHERE Email = :email AND Password = :password";
+            // Get the user with the provided email
+            $query = "SELECT Email as email, Password as password FROM Patient WHERE Email = :email";
             $stmt = $pdo->prepare($query);
             $stmt->bindParam(':email', $data['email']);
-            $stmt->bindParam(':password', $data['password']);
             if ($stmt->execute()) {
                 $user = $stmt->fetch(PDO::FETCH_ASSOC);
-                if ($user) {
+                if ($user && password_verify($data['password'], $user['password'])) {
                     echo json_encode(["user" =>  $user["email"], "type" => "patient", "status" => "200"]);
                 } else {
-                    $query = "SELECT Email as email, StaffID FROM Staff WHERE Email = :email AND Password = :password";
+                    $query = "SELECT Email as email, Password as password, StaffID FROM Staff WHERE Email = :email AND Password = :password";
                     $stmt = $pdo->prepare($query);
                     $stmt->bindParam(':email', $data['email']);
                     $stmt->bindParam(':password', $data['password']);
                     if ($stmt->execute()) {
                         $user = $stmt->fetch(PDO::FETCH_ASSOC);
                         if ($user) {
-                            $query = "SELECT *  FROM Doctor WHERE StaffID = :staffid";
+                            $query = "SELECT * FROM Doctor WHERE StaffID = :staffid";
                             $stmt = $pdo->prepare($query);
                             $stmt->bindParam(':staffid', $user["StaffID"]);
                             if ($stmt->execute()) {
@@ -73,3 +66,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 }
+?>
