@@ -1,31 +1,46 @@
-import React from "react";
-// import ButtonToTop from "./backToTop";
-import { InputField, Button } from "govuk-react";
+import React, { useState, useEffect } from "react";
+import { Heading, Button, LoadingBox } from "govuk-react";
 
-function deregister(){
-    const handleAjax = () =>{
-        $.ajax({
-            type: "POST",
-            url: "http://localhost:8000/server.php",
-            data: { name: "wigfblrwihebfihewr" },
-            success(data) {
-                console.log(data);
-            },
-        });
+function Deregister() {
+  const [loading, setLoading] = useState(false);
+  const [deregistered, setDeregistered] = useState(false);
+
+  const handleDeregister = () => {
+    const email = localStorage.getItem("email");
+
+    setLoading(true);
+    fetch(`http://localhost:8000/deregisterPatient.php?email=${email}`)
+      .then((response) => response.text())
+      .then((data) => {
+        console.log(data);
+        setDeregistered(true);
+      });
+  };
+
+  useEffect(() => {
+    if (deregistered) {
+      setTimeout(() => {
+        setLoading(false);
+        window.location.href = "/main";
+      }, 2000);
     }
+  }, [deregistered]);
 
-    
-    return(
-        <div>
-            <h1> De-Register page</h1>
-            <p>Please confirm your details to de-register
-            <br/>yourself from AOC Surgery
-            </p>
- 
-            <Button class= "govuk-button" onClick={handleAjax} data-module = "govuk-button"> De-register</Button>
-{/* <ButtonToTop>top</ButtonToTop> */}
-        </div>
-    );
+  return (
+    <LoadingBox
+      loading={loading}
+      spinnerColor="#0b0c0c"
+      backgroundColor="#ffffff"
+      backgroundColorOpacity={0.85}
+      timeIn={800}
+      timeOut={200}
+    >
+      <div>
+        <Heading> Deregister page</Heading>
+        <Button onClick={handleDeregister}>Deregister</Button>
+      </div>
+    </LoadingBox>
+  );
 }
 
-export default deregister;
+export default Deregister;

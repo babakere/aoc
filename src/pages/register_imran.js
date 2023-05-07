@@ -1,7 +1,15 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import InputField from "@govuk-react/input-field";
 import DateField from "@govuk-react/date-field";
-import { Button, Heading } from "govuk-react";
+import {
+  Button,
+  Heading,
+  Panel,
+  LoadingBox,
+  MultiChoice,
+  Radio,
+} from "govuk-react";
+import { useNavigate } from "react-router-dom";
 
 function Register() {
   const [firstName, setFirstName] = useState("");
@@ -13,13 +21,32 @@ function Register() {
   const [gender, setGender] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [errors, setErrors] = useState({});
+
+  const [isPanelVisible, setIsPanelVisible] = useState(false);
+  const navigate = useNavigate();
+
+  const [dateInput, setDateInput] = useState({ day: "", month: "", year: "" });
+
+  useEffect(() => {
+    const { day, month, year } = dateInput;
+    if (day && month && year) {
+      setBirthDate(`${day}-${month}-${year}`);
+    } else {
+      setBirthDate("");
+    }
+  }, [dateInput]);
+
+  const handleDateFieldChange = (date) => {
+    setDateInput(date);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = {
       firstName,
       lastName,
-      //concat the birthdate
       birthDate,
       telNo,
       nhsNumber,
@@ -28,9 +55,27 @@ function Register() {
       email,
       password,
     };
+    const newErrors = {};
+
+    if (!firstName) newErrors.firstName = "Complete First Name";
+    if (!lastName) newErrors.lastName = "Complete Last Name";
+    if (!birthDate) newErrors.birthDate = "Complete Birth Date";
+    if (!telNo) newErrors.telNo = "Complete Tel No";
+    if (!nhsNumber) newErrors.nhsNumber = "Complete NHS Number";
+    if (!address) newErrors.address = "Complete Address";
+    if (!gender) newErrors.gender = "Complete Gender";
+    if (!email) newErrors.email = "Complete Email";
+    if (!password) newErrors.password = "Complete Password";
+    if (!birthDate) newErrors.birthDate = "Complete Birth Date";
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
 
     console.log("Form Data:", formData);
     try {
+      setLoading(true);
       const response = await fetch("http://localhost:8000/register.php", {
         method: "POST",
         headers: {
@@ -41,153 +86,141 @@ function Register() {
 
       const result = await response.json();
       alert(result.message);
+
+      setIsPanelVisible(true);
+      setLoading(false);
+
+      setTimeout(() => {
+        setIsPanelVisible(false);
+        navigate("/main");
+      }, 2000);
     } catch (error) {
       console.error("Error:", error);
+      setLoading(false);
     }
   };
-  const handleDateFieldChange = (date) => {
-    const { day, month, year } = date;
-    const dateString = `${day}-${month}-${year}`;
-    setBirthDate(dateString);
-  };
+
   return (
     <div>
       <Heading>Register Page</Heading>
-      <form onSubmit={handleSubmit}>
-        <div className="input-container">
-          <div className="reg-left">
-            <InputField
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
-            >
-              First Name
-            </InputField>
-            <InputField
-              value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
-            >
-              Last Name
-            </InputField>
-            {/* <DateField
-              value={birthDate}
-              onChange={(e) => handleDateFieldChange(e.target)}
-            ></DateField> */}
-            <DateField
-              input={{
-                value: {
-                  day: birthDate.split("-")[0],
-                  month: birthDate.split("-")[1],
-                  year: birthDate.split("-")[2],
-                },
-                onChange: handleDateFieldChange,
-              }}
-            ></DateField>
-            <InputField
-              value={telNo}
-              onChange={(e) => setTelNo(e.target.value)}
-            >
-              Tel No
-            </InputField>
-            <InputField
-              value={nhsNumber}
-              onChange={(e) => setNhsNumber(e.target.value)}
-            >
-              NHS Number
-            </InputField>
-          </div>
-          <div className="reg-right">
-            <InputField
-              value={address}
-              onChange={(e) => setAddress(e.target.value)}
-            >
-              Address
-            </InputField>
-            <InputField
-              value={gender}
-              onChange={(e) => setGender(e.target.value)}
-            >
-              Gender
-            </InputField>
-            <InputField
-              value={email}
-              input={{
-                autoComplete: "email",
-                name: "group1",
-                type: "email",
-              }}
-              onChange={(e) => setEmail(e.target.value)}
-            >
-              Email
-            </InputField>
-            <InputField
-              value={password}
-              input={{
-                autoComplete: "new-password",
-                name: "group1",
-                type: "password",
-              }}
-              onChange={(e) => setPassword(e.target.value)}
-            >
-              Password
-            </InputField>
-          </div>
-        </div>
-        <Button type="submit">Submit</Button>
-      </form>
+      <LoadingBox loading={loading} backgroundColorOpacity={0.85}>
+        {!isPanelVisible && (
+          <form onSubmit={handleSubmit}>
+            <div className="input-container">
+              <div className="reg-left">
+                <InputField
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
+                  meta={{ error: errors.firstName, touched: true }}
+                >
+                  First Name
+                </InputField>
+                <InputField
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
+                  meta={{ error: errors.lastName, touched: true }}
+                >
+                  Last Name
+                </InputField>
+                <DateField
+                  input={{
+                    value: dateInput,
+                    onChange: handleDateFieldChange,
+                  }}
+                  errorText={errors.birthDate}
+                >
+                  Date of birth
+                </DateField>
+                <InputField
+                  value={telNo}
+                  onChange={(e) => setTelNo(e.target.value)}
+                  meta={{ error: errors.telNo, touched: true }}
+                >
+                  Tel No
+                </InputField>
+                <InputField
+                  value={nhsNumber}
+                  onChange={(e) => setNhsNumber(e.target.value)}
+                  meta={{ error: errors.nhsNumber, touched: true }}
+                >
+                  NHS Number
+                </InputField>
+              </div>
+              <div className="reg-right">
+                <InputField
+                  value={address}
+                  onChange={(e) => setAddress(e.target.value)}
+                  meta={{ error: errors.address, touched: true }}
+                >
+                  {" "}
+                  Address
+                </InputField>
+                <MultiChoice
+                  label="Gender"
+                  meta={{ error: errors.gender, touched: true }}
+                >
+                  <Radio
+                    inline
+                    name="group1"
+                    value="Male"
+                    onChange={(e) => setGender(e.target.value)}
+                  >
+                    Male
+                  </Radio>
+                  <Radio
+                    inline
+                    name="group1"
+                    value="Female"
+                    onChange={(e) => setGender(e.target.value)}
+                  >
+                    Female
+                  </Radio>
+                  <Radio
+                    inline
+                    name="group1"
+                    value="Other"
+                    onChange={(e) => setGender(e.target.value)}
+                  >
+                    Other
+                  </Radio>
+                </MultiChoice>
+                <InputField
+                  value={email}
+                  input={{
+                    autoComplete: "email",
+                    name: "group1",
+                    type: "email",
+                  }}
+                  onChange={(e) => setEmail(e.target.value)}
+                  meta={{ error: errors.email, touched: true }}
+                >
+                  Email
+                </InputField>
+                <InputField
+                  value={password}
+                  input={{
+                    autoComplete: "new-password",
+                    name: "group1",
+                    type: "password",
+                  }}
+                  onChange={(e) => setPassword(e.target.value)}
+                  meta={{ error: errors.password, touched: true }}
+                >
+                  Password
+                </InputField>
+              </div>
+            </div>
+            <Button type="submit">Submit</Button>
+          </form>
+        )}
+      </LoadingBox>
+      {isPanelVisible && (
+        <Panel title="Registration complete" className="panel">
+          You have successfully registered!
+        </Panel>
+      )}
     </div>
   );
 }
 
 export default Register;
-
-/* import React from "react";
-import Header from "../header";
-import InputField from "@govuk-react/input-field";
-import DateField from "@govuk-react/date-field";
-import { Button, Heading } from "govuk-react";
-
-function Register() {
-  <Header></Header>;
-  return (
-    <div>
-      <Heading>Register Page</Heading>
-      <div className="input-container">
-        <div className="reg-left">
-          <InputField>First Name</InputField>
-          <InputField>Middle Name</InputField>
-          <InputField>Last Name</InputField>
-          <DateField></DateField>
-          <InputField
-            input={{
-              autoComplete: "email",
-              name: "group1",
-              type: "email",
-            }}
-          >
-            Tel No
-          </InputField>
-        </div>
-        <div className="reg-right">
-          <InputField>Address</InputField>
-          <InputField>Street Name</InputField>
-          <InputField>Post Code</InputField>
-          <InputField>NHS Number</InputField>
-          <InputField
-            input={{
-              autoComplete: "email",
-              name: "group1",
-              type: "email",
-            }}
-          >
-            Email
-          </InputField>
-          <InputField>Password</InputField>
-        </div>
-      </div>
-      <Button>Submit</Button>
-    </div>
-  );
-}
-
-export default Register;
- */

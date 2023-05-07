@@ -9,20 +9,21 @@ function Login() {
   const [showError, setShowError] = useState(false);
 
   const handleLogin = async () => {
+    localStorage.setItem("email", email); // Save email in local storage
+
     const response = await fetch("http://localhost:8000/user.php/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ email, password }),
-    })
+    });
     const data = await response.json();
-    console.log(data)
+    console.log(data);
     if (data.status == "200") {
       localStorage.setItem("loggedIn", "true");
       localStorage.setItem("user", JSON.stringify(data.user));
-      if(data.staffid){
-
+      if (data.staffid) {
         localStorage.setItem("staffid", data.staffid);
       }
       navigate(`/${data.type}`);
@@ -34,10 +35,8 @@ function Login() {
   return (
     <div className="input">
       <H2> Welcome Back to AOC Surgery </H2>
-      <InputField
-        className="input"
-        onChange={(e) => setEmail(e.target.value)}
-      >
+
+      <InputField className="input" onChange={(e) => setEmail(e.target.value)}>
         Email
       </InputField>
       <InputField
@@ -68,6 +67,3 @@ function Login() {
 }
 
 export default Login;
-
-
-
