@@ -6,17 +6,17 @@ function Patient(){
     const handleSubmit = async (e) => {
         e.preventDefault();
         const formData = {
-          firstName,
-          lastName,
-          //concat the birthdate
-          birthDate,
-          telNo,
-          nhsNumber,
-          address,
-          gender,
-          email,
-          password,
+          
         };
+
+        useEffect(() => {
+            const { day, month, year } = dateInput;
+            if (day && month && year) {
+              setBirthDate(`${day}-${month}-${year}`);
+            } else {
+              setBirthDate("");
+            }
+          }, [dateInput]);
     
         console.log("Form Data:", formData);
         try {
@@ -90,7 +90,12 @@ function Patient(){
                 <div className="requestApointment" >
                     
                     <H3 className="requestApointment"> Request Appointment </H3>
-                    <DateField className="requestApointment">Appointment Time</DateField>
+                    <DateField 
+                    input={{
+                        value: dateInput,
+                        onChange: handleDateFieldChange,
+                      }}
+                      errorText={errors.birthDate} className="requestApointment">Appointment date</DateField>
                     <InputField className="requestApointment">  time: </InputField>
                     <InputField className="requestApointment">  type of appointment: </InputField>
                     <InputField className="requestApointment">  location for appointment: </InputField>
@@ -100,7 +105,7 @@ function Patient(){
                 </div>
 
                 <div classname = "SymptomsChecker2" >
-                    <h1> Symptom Checker </h1>
+                    <H3> Symptom Checker </H3>
                     <Checkbox className="symptoms">Coughing</Checkbox>
                     <Checkbox className="symptoms">Shortness of breath or difficulty breathing</Checkbox>
                     <Checkbox className="symptoms">Fever or chills</Checkbox>
