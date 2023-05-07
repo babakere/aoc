@@ -92,6 +92,9 @@ function Patient(){
                     <H3 className="requestApointment"> Request Appointment </H3>
                     <DateField className="requestApointment">Appointment Time</DateField>
                     <InputField className="requestApointment">  time: </InputField>
+                    <InputField className="requestApointment">  type of appointment: </InputField>
+                    <InputField className="requestApointment">  location for appointment: </InputField>
+
                     <Button className="requestApointment" onClick={handleSubmit}>confirm</Button>
 
                 </div>
