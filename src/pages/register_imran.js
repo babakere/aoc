@@ -67,6 +67,27 @@ function Register() {
     if (!email) newErrors.email = "Complete Email";
     if (!password) newErrors.password = "Complete Password";
     if (!birthDate) newErrors.birthDate = "Complete Birth Date";
+    // Check if date inputs are numbers and within the correct ranges
+    const { day, month, year } = dateInput;
+    if (birthDate) {
+      if (
+        isNaN(day) ||
+        isNaN(month) ||
+        isNaN(year) ||
+        day < 1 ||
+        day > 31 ||
+        month < 1 ||
+        month > 12 ||
+        year < 1900 ||
+        year > new Date().getFullYear()
+      ) {
+        newErrors.birthDate = "Invalid Birth Date";
+      }
+    }
+    // Check if telNo and nhsNumber inputs are numbers only
+    if (telNo && isNaN(telNo)) newErrors.telNo = "Invalid Tel No";
+    if (nhsNumber && isNaN(nhsNumber))
+      newErrors.nhsNumber = "Invalid NHS Number";
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
