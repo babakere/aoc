@@ -20,13 +20,6 @@ const Header = () => {
         </TopNav.NavLink>
       }
     >
-
-      <TopNav.NavLink href="about">About</TopNav.NavLink>
-      <TopNav.NavLink href="location">Location</TopNav.NavLink>
-      <TopNav.NavLink href="loginselection">Login</TopNav.NavLink>
-      <TopNav.NavLink href="register">Register</TopNav.NavLink>
-      <TopNav.NavLink href="deregister">Deregister</TopNav.NavLink>
-
       {location.pathname != "/patientRecord" && (
         <>
           <div style={{ width: "200%" }}>
@@ -42,6 +35,9 @@ const Header = () => {
             <TopNav.NavLink href="register" style={{ margin: "3%" }}>
               Register{" "}
             </TopNav.NavLink>
+            <TopNav.NavLink href="deregister" style={{ margin: "3%" }}>
+              Deregister
+            </TopNav.NavLink>
           </div>
         </>
       )}
@@ -50,7 +46,6 @@ const Header = () => {
           <TopNav.NavLink href="main">Home</TopNav.NavLink>
         </>
       )}
-
     </TopNav>
   );
 };
