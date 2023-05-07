@@ -6,10 +6,12 @@ const Header = () => {
     <TopNav
       children={
         <div>
-          <Link href="about" >
-            about
-          </Link>
+          <Link href="about" >about</Link>
+          
           <Link href="location">location</Link>
+          
+          <Link href="Patient">patient</Link>
+
         </div>
       }
     ></TopNav>

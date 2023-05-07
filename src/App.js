@@ -9,11 +9,18 @@ import { Link } from "govuk-react";
 import Info from "./info";
 import { TopNav } from "govuk-react";
 import Header from "./header";
+import Patient from "./pages/patient_mo";
+import { Route, Routes } from "react-router-dom";
+
 function App() {
   return (
     <div className="App">
       <Page header={<Header></Header>}>
-        <Info></Info>
+       <Routes>
+<Route path="/patient" element={ <Patient/>}></Route>
+
+       
+       </Routes>
       </Page>
       <Footer></Footer>
     </div>

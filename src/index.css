@@ -14,3 +14,97 @@ code {
 .blue {
   margin: 100px;
 }
+
+.dot{
+  margin-right: auto;
+  margin-left: auto;
+
+}
+
+.registration{
+  width: 20pc;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.notes{
+  width:20pc;
+
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.grid{
+  width: 100%;
+  display: grid;
+ grid-template-columns: 50% 50%;
+}
+.notes{
+  text-align: left;
+
+}
+
+.appoinf{
+  text-align: center;
+}
+.Request{
+  width: 50%;
+  
+}
+.parientInfo{
+  margin-left: 60%;
+}
+
+.parientInfocomp{
+  
+  margin-left:80%;
+
+}
+
+.RequestPrescription{
+
+width: 60%;
+text-align:left;
+
+}
+.requestApointment{
+  margin-left: 20%;
+  width: 75%;
+  text-align: left;
+
+}
+.symptoms{
+  text-align: left;
+  margin-left: 35%;
+  
+
+}
+
+
+.SymptomsChecker{
+  margin-left: 30%;
+  width:auto;
+  height: inherit;
+  
+}
+
+.Pinfo{
+  text-align:left;
+  width:40%;
+  margin-left: 30%;
+
+}
+
+.RequestPrescription2{
+  width: 60%;
+text-align:left;
+
+}
+.SymptomsChecker2{
+  margin-left: 30%;
+  width:auto;
+  height: inherit;
+
+}
