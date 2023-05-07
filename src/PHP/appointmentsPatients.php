@@ -5,7 +5,7 @@ header("Access-Control-Allow-Methods: *");
 header("Content-Type: application/json");
 
 try {
-    $pdo = new PDO("sqlite:/Users/evan/Downloads/AOC.db");
+    $pdo = new PDO("sqlite:AOC.db");
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
     echo json_encode(["message" => "Connection failed: " . $e->getMessage()]);
@@ -13,10 +13,10 @@ try {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    $staffid = $_GET['StaffID'];
-    $query = "SELECT * FROM Appointment WHERE StaffID = :staffid";
+    $patientid = $_GET['patientID'];
+    $query = "SELECT * FROM Appointment WHERE patientID = :patientid";
     $stmt = $pdo->prepare($query);
-    $stmt->bindParam(':staffid', $staffid);
+    $stmt->bindParam(':patientid', $patientid);
 
     if ($stmt->execute()) {
         $appointments = [];
@@ -28,3 +28,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         echo json_encode(["message" => "Unable to retrieve appointments. Please try again."]);
     }
 }
+
+
+?>
