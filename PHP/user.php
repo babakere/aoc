@@ -6,7 +6,7 @@ header("Access-Control-Allow-Methods: *");
 header("Content-Type: application/json");
 
 try {
-    $pdo = new PDO("sqlite:/Users/evan/Downloads/AOC.db");
+    $pdo = new PDO("sqlite:/Users/ImranBary/AOC.db");
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
     echo json_encode(["message" => "Connection failed: " . $e->getMessage()]);
