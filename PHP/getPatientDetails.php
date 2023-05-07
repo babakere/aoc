@@ -4,20 +4,20 @@ header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: *");
 header("Content-Type: application/json");
-
-$email = $_GET['email'];
+$NHSNumber = $_GET['NHSNumber'];
 
 try {
-    $db = new PDO('sqlite:/Users/ImranBary/AOC.db');
-    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-    $stmt = $db->prepare('SELECT * FROM Patient WHERE Email = :email');
-    $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+    $db = new PDO("sqlite:/Users/ImranBary/AOC.db");
+    $query = "SELECT * FROM Patient WHERE NHSNumber = :NHSNumber";
+    $stmt = $db->prepare($query);
+    $stmt->bindValue(':NHSNumber', $NHSNumber, PDO::PARAM_INT);
     $stmt->execute();
-    $patientDetails = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    echo json_encode($patientDetails);
-} catch (PDOException $e) {
-    echo json_encode(['error' => $e->getMessage()]);
+    $patient = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    echo json_encode($patient);
+
+} catch(PDOException $e) {
+    echo "Error: " . $e->getMessage();
 }
 ?>

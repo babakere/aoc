@@ -29,25 +29,31 @@ code {
 }
 
 .loginButton {
+width: auto;
+  display: inline;
+  margin-inline: 10px;
+ 
+}
+
+Button{
+  
+
   width: auto;
   display: inline;
   margin-inline: 10px;
+ 
 }
 
-Button {
-  width: auto;
-  display: inline;
-  margin-inline: 10px;
-}
 
-.view {
+
+.view{
   display: block;
   text-align: justify;
   margin-block: 10px;
   padding: 10px;
 }
-.pages {
-  min-height: calc(100vh - 111px);
+.pages{
+  min-height: calc(100vh - 111px)
 }
 
 .input-container {
@@ -69,6 +75,11 @@ div .p-details {
   width: 70vw;
 }
 
-.errorMessage {
+
+
+
+.errorMessage{
   padding-bottom: 20px;
 }
+
+
