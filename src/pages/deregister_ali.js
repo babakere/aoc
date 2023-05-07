@@ -3,16 +3,37 @@ import React from "react";
 import { InputField, Button } from "govuk-react";
 
 function deregister(){
-    const handleAjax = () =>{
-        $.ajax({
-            type: "POST",
-            url: "http://localhost:8000/server.php",
-            data: { name: "wigfblrwihebfihewr" },
-            success(data) {
-                console.log(data);
+    // const handleAjax = () =>{
+    //     $.ajax({
+    //         type: "POST",
+    //         url: "http://localhost:8000/server.php",
+    //         data: { name: "wigfblrwihebfihewr" },
+    //         success(data) {
+    //             console.log(data);
+    //         },
+    //     });
+    // }
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        
+    
+        
+        try {
+          const response = await fetch("http://localhost:8000/register.php", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
             },
-        });
-    }
+            body: JSON.stringify(""),
+          });
+    
+          const result = await response.json();
+          alert(result.message);
+        } catch (error) {
+          console.error("Error:", error);
+        }
+      };
 
     
     return(
@@ -22,7 +43,7 @@ function deregister(){
             <br/>yourself from AOC Surgery
             </p>
  
-            <Button class= "govuk-button" onClick={handleAjax} data-module = "govuk-button"> De-register</Button>
+            <Button className= "govuk-button" onClick={handleSubmit} data-module = "govuk-button"> De-register</Button>
 {/* <ButtonToTop>top</ButtonToTop> */}
         </div>
     );
