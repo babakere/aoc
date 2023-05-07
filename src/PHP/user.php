@@ -7,7 +7,9 @@ header("Content-Type: application/json");
 
 
 try {
+
     $pdo = new PDO("sqlite:AOC.db");
+
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
     echo json_encode(["message" => "Connection failed: " . $e->getMessage()]);
