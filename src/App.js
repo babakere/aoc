@@ -6,7 +6,7 @@ import Register from "./pages/register_imran";
 import PatientRecord from "./pages/patient_record_imran";
 import Info from "./info";
 import Login from "./pages/secondLogin_evan";
-
+import Patient from "./pages/patient_mo";
 
 
 import {Routes,Route, useNavigate} from "react-router-dom";
@@ -49,6 +49,8 @@ const [islogged, setIsLogged] = useState(
           <Route path="/loginselection" element={<LoginSelection />} />
           <Route path="/login" element={<Login />} />
           <Route path="/main" element={<Main />} />
+          <Route path="/patient" element={<Patient />} />
+          
           <Route path="/deregister" element={<Deregister />} />
           <Route path="/mainpage" element={< MainPage/>} />
           <Route path="/register" element={<Register />} />
