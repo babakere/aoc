@@ -1,7 +1,14 @@
 import React, { useState, useEffect } from "react";
 import InputField from "@govuk-react/input-field";
 import DateField from "@govuk-react/date-field";
-import { Button, Heading, Panel, LoadingBox } from "govuk-react";
+import {
+  Button,
+  Heading,
+  Panel,
+  LoadingBox,
+  MultiChoice,
+  Radio,
+} from "govuk-react";
 import { useNavigate } from "react-router-dom";
 
 function Register() {
@@ -15,6 +22,7 @@ function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [errors, setErrors] = useState({});
 
   const [isPanelVisible, setIsPanelVisible] = useState(false);
   const navigate = useNavigate();
@@ -47,6 +55,23 @@ function Register() {
       email,
       password,
     };
+    const newErrors = {};
+
+    if (!firstName) newErrors.firstName = "Complete First Name";
+    if (!lastName) newErrors.lastName = "Complete Last Name";
+    if (!birthDate) newErrors.birthDate = "Complete Birth Date";
+    if (!telNo) newErrors.telNo = "Complete Tel No";
+    if (!nhsNumber) newErrors.nhsNumber = "Complete NHS Number";
+    if (!address) newErrors.address = "Complete Address";
+    if (!gender) newErrors.gender = "Complete Gender";
+    if (!email) newErrors.email = "Complete Email";
+    if (!password) newErrors.password = "Complete Password";
+    if (!birthDate) newErrors.birthDate = "Complete Birth Date";
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
 
     console.log("Form Data:", formData);
     try {
@@ -86,12 +111,14 @@ function Register() {
                 <InputField
                   value={firstName}
                   onChange={(e) => setFirstName(e.target.value)}
+                  meta={{ error: errors.firstName, touched: true }}
                 >
                   First Name
                 </InputField>
                 <InputField
                   value={lastName}
                   onChange={(e) => setLastName(e.target.value)}
+                  meta={{ error: errors.lastName, touched: true }}
                 >
                   Last Name
                 </InputField>
@@ -100,16 +127,21 @@ function Register() {
                     value: dateInput,
                     onChange: handleDateFieldChange,
                   }}
-                ></DateField>
+                  errorText={errors.birthDate}
+                >
+                  Date of birth
+                </DateField>
                 <InputField
                   value={telNo}
                   onChange={(e) => setTelNo(e.target.value)}
+                  meta={{ error: errors.telNo, touched: true }}
                 >
                   Tel No
                 </InputField>
                 <InputField
                   value={nhsNumber}
                   onChange={(e) => setNhsNumber(e.target.value)}
+                  meta={{ error: errors.nhsNumber, touched: true }}
                 >
                   NHS Number
                 </InputField>
@@ -118,16 +150,40 @@ function Register() {
                 <InputField
                   value={address}
                   onChange={(e) => setAddress(e.target.value)}
+                  meta={{ error: errors.address, touched: true }}
                 >
                   {" "}
                   Address
                 </InputField>
-                <InputField
-                  value={gender}
-                  onChange={(e) => setGender(e.target.value)}
+                <MultiChoice
+                  label="Gender"
+                  meta={{ error: errors.gender, touched: true }}
                 >
-                  Gender
-                </InputField>
+                  <Radio
+                    inline
+                    name="group1"
+                    value="Male"
+                    onChange={(e) => setGender(e.target.value)}
+                  >
+                    Male
+                  </Radio>
+                  <Radio
+                    inline
+                    name="group1"
+                    value="Female"
+                    onChange={(e) => setGender(e.target.value)}
+                  >
+                    Female
+                  </Radio>
+                  <Radio
+                    inline
+                    name="group1"
+                    value="Other"
+                    onChange={(e) => setGender(e.target.value)}
+                  >
+                    Other
+                  </Radio>
+                </MultiChoice>
                 <InputField
                   value={email}
                   input={{
@@ -136,6 +192,7 @@ function Register() {
                     type: "email",
                   }}
                   onChange={(e) => setEmail(e.target.value)}
+                  meta={{ error: errors.email, touched: true }}
                 >
                   Email
                 </InputField>
@@ -147,6 +204,7 @@ function Register() {
                     type: "password",
                   }}
                   onChange={(e) => setPassword(e.target.value)}
+                  meta={{ error: errors.password, touched: true }}
                 >
                   Password
                 </InputField>

@@ -31,14 +31,16 @@ if (
     $query = "INSERT INTO Patient (Name, Surname, PersonDB, Email, Address, Gender, Password, NHSNumber) VALUES (:firstName, :lastName, :birthDate, :email, :address, :gender, :password, :nhsNumber)";
 
     $stmt = $pdo->prepare($query);
-
+    // Hash the password before saving to the database
+    $hashedPassword = password_hash($data->password, PASSWORD_DEFAULT);
+  
     $stmt->bindParam(':firstName', $data->firstName);
     $stmt->bindParam(':lastName', $data->lastName);
     $stmt->bindParam(':birthDate', $data->birthDate);
     $stmt->bindParam(':email', $data->email);
     $stmt->bindParam(':address', $data->address);
     $stmt->bindParam(':gender', $data->gender);
-    $stmt->bindParam(':password', $data->password);
+ $stmt->bindParam(':password', $hashedPassword); // Bind hashed password
     $stmt->bindParam(':nhsNumber', $data->nhsNumber);
 
 
