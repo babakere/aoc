@@ -12,22 +12,31 @@ try {
     exit();
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    $patientid = $_GET['patientID'];
-    $query = "SELECT * FROM Appointment WHERE patientID = :patientid";
+$data = json_decode(file_get_contents("php://input"));
+
+if (!empty($data->appointmentDate) &&!empty($data->appointmentTime) && !empty($data->appointmentType) && !empty($data->appointmentLocation) ) {
+
+    $query = "INSERT INTO Appointment (AppointmentDate, AppointmentTime, TypeOfAppointment, AppointmentLocation) VALUES (:firstName, :lastName, :birthDate, :email, :address, :gender, :password, :nhsNumber)";
+
     $stmt = $pdo->prepare($query);
-    $stmt->bindParam(':patientid', $patientid);
+
+
+
+    $stmt->bindParam(':appointmentDate', $data->appointmentDate);
+    $stmt->bindParam(':appointmentTime', $data->appointmentTime);
+    $stmt->bindParam(':appointmentType', $data->appointmentType);
+    $stmt->bindParam(':AppointmentLocation', $data->appointmentLocation);
+
 
     if ($stmt->execute()) {
-        $appointments = [];
-        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            $appointments[] = $row;
-        }
-        echo json_encode(["Appointments" => $appointments]);
+        echo json_encode(["message" => "User registered successfully."]);
     } else {
-        echo json_encode(["message" => "Unable to retrieve appointments. Please try again."]);
+        echo json_encode(["message" => "Unable to register user. Please try again."]);
     }
+
+
+
+
+}else {
+    echo json_encode(["message" => "Unable to register user. Data is incomplete."]);
 }
-
-
-?>
