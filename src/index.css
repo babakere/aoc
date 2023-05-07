@@ -11,8 +11,66 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-.blue {
-  margin: 100px;
+.input {
+  width: 75%;
+  margin-top: 20px;
+  padding-bottom: 10px;
+}
+.loginRadio {
+  width: 10%;
+  margin-right: auto;
+  margin-left: auto;
+}
+.checkBox {
+  position: relative;
+  padding-top: 10px;
+
+  padding-bottom: 10px;
+}
+
+.loginButton {
+  width: auto;
+  display: inline;
+  margin-inline: 10px;
+}
+
+Button {
+  width: auto;
+  display: inline;
+  margin-inline: 10px;
+}
+
+.view {
+  display: block;
+  text-align: justify;
+  margin-block: 10px;
+  padding: 10px;
+}
+.pages {
+  min-height: calc(100vh - 111px);
+}
+
+.input-container {
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+.reg-left {
+  margin: 1rem;
+}
+.reg-right {
+  margin: 1rem;
+}
+.patient-record-page {
+  height: 70vh;
+}
+
+div .p-details {
+  width: 70vw;
+}
+
+.errorMessage {
+  padding-bottom: 20px;
 }
 
 .dot{
