@@ -37,7 +37,7 @@ const Header = () => {
     >
       {location.pathname === "/main" && (
         <div style={{ width: "200%" }}>
-          <Button onClick={() => handleButtonClick("/login")}>Login</Button>
+          <Button onClick={() => handleButtonClick("/loginselection")}>Login</Button>
           <Button
             onClick={() => handleButtonClick("/register")}
             buttonColour="#f3f2f1"

@@ -67,7 +67,7 @@ function MainPage() {
           </p>
           <Button
             className="button"
-            onClick={() => handleButtonClick("/login")}
+            onClick={() => handleButtonClick("/loginselection")}
           >
             Login
           </Button>
