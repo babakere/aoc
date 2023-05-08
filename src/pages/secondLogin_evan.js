@@ -23,8 +23,12 @@ function Login() {
     if (data.status == "200") {
       localStorage.setItem("loggedIn", "true");
       localStorage.setItem("user", JSON.stringify(data.user));
+
       if (data.staffid) {
         localStorage.setItem("staffid", data.staffid);
+      }
+      if (data.patientid) {
+        localStorage.setItem("patientid", data.patientid);
       }
       navigate(`/${data.type}`);
     } else {
