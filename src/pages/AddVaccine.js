@@ -79,7 +79,7 @@ console.log(vaccine)
         {headersToInclude.map((header) => (
           <React.Fragment key={header}>
             {header === "Booster" ? (
-              <div>
+              <div >
                 <label>{header}</label>
                 <div>
                   <input

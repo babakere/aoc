@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 function Vaccine() {
   const [patientDetails, setPatientDetails] = useState({});
   const [vaccineRecords, setVaccineRecords] = useState([]);
-  const [editing, setEditing] = useState({});
+
 
   useEffect(() => {
     const selectedPatient = JSON.parse(localStorage.getItem("selectedPatient"));
@@ -41,13 +41,13 @@ function Vaccine() {
     "PersonDB",
     "Address",
     "Gender",
-    "Password",
+   
     "NHSNumber",
   ];
 
   return (
     <div>
-      <Heading>Patient Record</Heading>
+      <Heading>Patient Vaccine Record</Heading>
 
       <Table>
         {headersToInclude.map((head, index) => (

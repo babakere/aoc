@@ -43,6 +43,15 @@ function DoctorPat() {
       localStorage.setItem("selectedPatient", JSON.stringify(patient));
   };
 
+  const headersToInclude = [
+
+"Name",
+"Surname",
+"PersonDB",
+"Email",
+"Address",
+"Gender",
+"NHSNumber"];
 
   return (
     <div >
@@ -52,13 +61,13 @@ function DoctorPat() {
           <H2>Patients </H2>
           <Table>
             <Table.Row>
-              {Object.keys(testData[0]).map((head) => (
+              {Object.keys(testData[0]).filter((key) => headersToInclude.includes(key)).map((head) => (
                 <Table.CellHeader key={head}>{head}</Table.CellHeader>
               ))}
             </Table.Row>
             {testData.map((patient, index) => (
               <Table.Row key={index}>
-                {Object.keys(patient).map((data) => (
+                {Object.keys(patient).filter((key) => headersToInclude.includes(key)).map((data) =>(
                   <Table.Cell key={data}>{patient[data]}</Table.Cell>
                 ))}
 
