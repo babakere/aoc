@@ -15,7 +15,7 @@ import picture12 from "../images/12.png"
 
 // import Image from "./";
 
-function MainPage_ali() {
+function MainPage() {
 
   const [phone, setPhone] = useState("");
   const [fullname, setFullname] = useState("");
@@ -183,4 +183,4 @@ function MainPage_ali() {
   );
 }
 
-export default MainPage_ali;
+export default MainPage;

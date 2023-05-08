@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Button, Select, Table } from "govuk-react";
 import { useNavigate } from "react-router-dom";
-import { data } from "jquery";
+
 
 function View() {
   const [appointments, setAppointments] = useState([]);
