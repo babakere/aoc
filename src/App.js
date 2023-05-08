@@ -9,7 +9,7 @@ import Login from "./pages/secondLogin_evan";
 import Patient from "./pages/patient_mo";
 
 
-import Vaccine from "./pages/UpdateVaccine";
+import Vaccine from "./pages/UpdateVaccine_Evan";
 
 
 
@@ -25,7 +25,7 @@ import Header from "./header";
 
 import LoginSelection from "./pages/loginpage_evan";
 
-import AddVaccine from "./pages/AddVaccine";
+import AddVaccine from "./pages/AddVaccine_Evan";
 
 
 import { createContext, useState } from "react";
