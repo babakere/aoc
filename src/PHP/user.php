@@ -44,20 +44,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     echo json_encode(["user" =>  $user["email"], "staffid" => $user["StaffID"], "type" => "admin", "status" => "200"]);
                                 }
                             } else {
-                                http_response_code(405);
+                                http_response_code(401);
                                 echo json_encode(["message" => "Failed to log in."]);
                             }
                         } else {
-                            http_response_code(404);
+                            http_response_code(401);
                             echo json_encode(["message" => 'Invalid username or password']);
                         }
                     } else {
-                        http_response_code(403);
+                        http_response_code(401);
                         echo json_encode(["message" => "Failed to log in."]);
                     }
                 }
             } else {
-                http_response_code(402);
+                http_response_code(401);
                 echo json_encode(["message" => "Failed to log in."]);
             }
         } catch (PDOException $e) {
