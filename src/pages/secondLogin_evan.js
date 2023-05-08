@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, H2, H4, InputField, WarningText } from "govuk-react";
+import { Button, H2, H4, InputField, WarningText, Input, Label, H5} from "govuk-react";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
@@ -37,18 +37,32 @@ function Login() {
   };
 
   return (
-    <div className="input">
+    <div >
       <H2> Welcome Back to AOC Surgery </H2>
+      <Label>
 
-      <InputField className="input" onChange={(e) => setEmail(e.target.value)}>
-        Email
-      </InputField>
-      <InputField
-        className="input"
+      <H5>Email</H5>
+      </Label>
+      <Input
+      
+        type="email"
+        label="email"
+        value={email}
+
+        onChange={(e) => setEmail(e.target.value)}
+      />
+      <Label>
+
+      <H5>Password</H5>
+      </Label>
+      <Input
+      
+        type="password"
+        label="Password"
+        value={password}
+
         onChange={(e) => setPassword(e.target.value)}
-      >
-        Password
-      </InputField>
+      />
 
       {showError && (
         <WarningText className="errorMessage">

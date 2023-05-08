@@ -16,4 +16,3 @@ $db = null;
 
 // Return a response indicating success
 echo 'User deleted successfully';
-?>

@@ -10,9 +10,14 @@ import Patient from "./pages/addAppointment_mo";
 import Appointments from "./pages/cancelAndView_mo";
 
 
-import {Routes,Route, useNavigate} from "react-router-dom";
+
+import Vaccine from "./pages/UpdateVaccine_Evan";
+
+
+import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
 import Doctor from "./pages/DoctorPage_evan";
 import View from "./pages/viewAppointment_evan";
+
 
 import DoctorPat from "./pages/docPatientRecord_evan";
 import Edit from "./pages/editPatientPage_evan";
@@ -23,25 +28,27 @@ import Header from "./header";
 
 import LoginSelection from "./pages/loginpage_evan";
 
-import MainPage from "./pages/MainPage_ali";
+import AddVaccine from "./pages/AddVaccine_Evan";
 
 import { createContext, useState } from "react";
 export const useContext = createContext();
 
-
-
 function App() {
-const [islogged, setIsLogged] = useState(
-  localStorage.getItem("isLogged") || "false"
-)
-
-
+  const [islogged, setIsLogged] = useState(
+    localStorage.getItem("isLogged") || "false"
+  );
 
   return (
     <div className="App">
+      <div className="pages">
+        <useContext.Provider value={{ islogged, setIsLogged }}>
+          <Page header={<Header></Header>}>
+            <Routes>
+              {/* Evans code */}
 
-<div className="pages">
-      <useContext.Provider value={{islogged, setIsLogged}}>
+              <Route path="/main" element={<Main />} />
+              <Route path="/" element={<Navigate to="/main" />} />
+
 
       <Page  header={<Header></Header>}>
         <Routes>
@@ -59,7 +66,9 @@ const [islogged, setIsLogged] = useState(
           <Route path="/mainpage" element={< MainPage/>} />
           <Route path="/register" element={<Register />} />
 
-          <Route path="/patientRecord" element={<PatientRecord />} />
+
+              <Route path="/patient" element={<Patient />} />
+
 
           <Route path="/doctor" element={<Doctor/>} />
           <Route path="/view" element={<View/>}/>
@@ -67,14 +76,27 @@ const [islogged, setIsLogged] = useState(
           <Route path="/doctorPat" element={<DoctorPat/>}/>
           <Route path="edit" element={<Edit />}/>
 
+              <Route path="/deregister" element={<Deregister />} />
 
-        </Routes>
 
-      </Page>
-      </useContext.Provider>
-</div>
+              <Route path="/register" element={<Register />} />
+
+              <Route path="/patientRecord" element={<PatientRecord />} />
+
+              <Route path="/doctor" element={<Doctor />} />
+              <Route path="/view" element={<View />} />
+              <Route path="/doctorPat" element={<DoctorPat />} />
+              <Route path="edit" element={<Edit />} />
+              <Route path="/" element={<Info />} />
+
+              <Route path="/Vaccine" element={<Vaccine />} />
+              <Route path="/AddVaccine" element={<AddVaccine />} />
+            </Routes>
+          </Page>
+        </useContext.Provider>
+      </div>
+
       <Footer className="footer"></Footer>
-
     </div>
   );
 }
