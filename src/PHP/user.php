@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt->bindParam(':email', $data['email']);
             if ($stmt->execute()) {
                 $user = $stmt->fetch(PDO::FETCH_ASSOC);
-                if ($user && password_verify($data['password'], $user['password'])) {
+                if ($user && password_verify($data['password'], $user['password'])) { //this line does not work with verify password
                     echo json_encode(["user" =>  $user["email"], "type" => "patient", "status" => "200"]);
                 } else {
                     $query = "SELECT Email as email, Password as password, StaffID FROM Staff WHERE Email = :email AND Password = :password";
@@ -44,20 +44,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     echo json_encode(["user" =>  $user["email"], "staffid" => $user["StaffID"], "type" => "admin", "status" => "200"]);
                                 }
                             } else {
-                                http_response_code(401);
+                                http_response_code(405);
                                 echo json_encode(["message" => "Failed to log in."]);
                             }
                         } else {
-                            http_response_code(401);
+                            http_response_code(404);
                             echo json_encode(["message" => 'Invalid username or password']);
                         }
                     } else {
-                        http_response_code(401);
+                        http_response_code(403);
                         echo json_encode(["message" => "Failed to log in."]);
                     }
                 }
             } else {
-                http_response_code(401);
+                http_response_code(402);
                 echo json_encode(["message" => "Failed to log in."]);
             }
         } catch (PDOException $e) {
@@ -66,4 +66,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 }
-?>
