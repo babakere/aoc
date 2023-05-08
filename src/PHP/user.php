@@ -6,7 +6,7 @@ header("Access-Control-Allow-Methods: *");
 header("Content-Type: application/json");
 
 try {
-    $pdo = new PDO("sqlite:/Users/evan/Downloads/AOC.db");
+    $pdo = new PDO("sqlite:AOC.db");
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
     echo json_encode(["message" => "Connection failed: " . $e->getMessage()]);
@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     if ($stmt->execute()) {
                         $user = $stmt->fetch(PDO::FETCH_ASSOC);
                         if ($user) {
-                            $query = "SELECT Email as email, StaffID FROM Doctor WHERE StaffID = :staffid";
+                            $query = "SELECT * FROM Doctor WHERE StaffID = :staffid";
                             $stmt = $pdo->prepare($query);
                             $stmt->bindParam(':staffid', $user["StaffID"]);
                             if ($stmt->execute()) {
@@ -48,20 +48,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     echo json_encode(["user" =>  $user["email"], "staffid" => $user["StaffID"], "type" => "admin", "status" => "200"]);
                                 }
                             } else {
-                                http_response_code(401);
+                                http_response_code(406);
                                 echo json_encode(["message" => "Failed to log in."]);
                             }
                         } else {
-                            http_response_code(401);
+                            http_response_code(405);
                             echo json_encode(["message" => 'Invalid username or password']);
                         }
                     } else {
-                        http_response_code(401);
+                        http_response_code(404);
                         echo json_encode(["message" => "Failed to log in."]);
                     }
                 }
             } else {
-                http_response_code(401);
+                http_response_code(403);
                 echo json_encode(["message" => "Failed to log in."]);
             }
         } catch (PDOException $e) {

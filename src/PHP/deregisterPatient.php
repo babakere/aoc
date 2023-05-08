@@ -4,7 +4,7 @@ header("Content-Type: application/json; charset=UTF-8");
 
 $email = $_GET['email'];
 
-$dbname = '/Users/ImranBary/AOC.db';
+$dbname = 'AOC.db';
 $conn = new PDO("sqlite:$dbname");
 
 // Check if the Patient table exists
@@ -24,4 +24,3 @@ if ($table_check->fetch()) {
 }
 
 $conn = null;
-?>

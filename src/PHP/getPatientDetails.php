@@ -8,7 +8,7 @@ header("Content-Type: application/json");
 $email = $_GET['email'];
 
 try {
-    $db = new PDO('sqlite:/Users/ImranBary/AOC.db');
+    $db = new PDO('sqlite:AOC.db');
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     $stmt = $db->prepare('SELECT * FROM Patient WHERE Email = :email');
@@ -20,4 +20,3 @@ try {
 } catch (PDOException $e) {
     echo json_encode(['error' => $e->getMessage()]);
 }
-?>

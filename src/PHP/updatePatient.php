@@ -6,7 +6,7 @@ header("Content-Type: application/json");
 $postData = json_decode(file_get_contents("php://input"), true);
 
 try {
-    $conn = new PDO('sqlite:/Users/ImranBary/AOC.db');
+    $conn = new PDO('sqlite:AOC.db');
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     $sql = "UPDATE Patient SET Name = :name, Surname = :surname WHERE Email = :email";
@@ -23,4 +23,3 @@ try {
 }
 
 $conn = null;
-?>

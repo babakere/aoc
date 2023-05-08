@@ -7,6 +7,8 @@ import PatientRecord from "./pages/patient_record_imran";
 import Info from "./info";
 import Login from "./pages/secondLogin_evan";
 
+import Vaccine from "./pages/UpdateVaccine";
+
 
 
 import {Routes,Route, useNavigate} from "react-router-dom";
@@ -22,6 +24,7 @@ import Header from "./header";
 import LoginSelection from "./pages/loginpage_evan";
 
 import MainPage from "./pages/MainPage_ali";
+import AddVaccine from "./pages/AddVaccine";
 
 import { createContext, useState } from "react";
 export const useContext = createContext();
@@ -55,9 +58,11 @@ const [islogged, setIsLogged] = useState(
 
           <Route path="/doctor" element={<Doctor/>} />
           <Route path="/view" element={<View/>}/>
-          <Route path="/edit1" element={<Edit1/>}/>
+        
           <Route path="/doctorPat" element={<DoctorPat/>}/>
-          <Route path="edit" element={<Edit />}/>
+          <Route path="/edit" element={<Edit />}/>
+          <Route path="/Vaccine" element={<Vaccine />}/>
+          <Route path="/AddVaccine" element={<AddVaccine />}/>
 
 
         </Routes>

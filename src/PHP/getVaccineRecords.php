@@ -7,7 +7,7 @@ header("Content-Type: application/json");
 $NHSNumber = $_GET['NHSNumber'];
 
 try {
-    $db = new PDO('sqlite:/Users/ImranBary/vaccines.db');
+    $db = new PDO('sqlite:vaccines.db');
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     $stmt = $db->prepare('SELECT * FROM vaccines WHERE NHSNumber = :NHSNumber');
@@ -19,4 +19,3 @@ try {
 } catch (PDOException $e) {
     echo json_encode(['error' => $e->getMessage()]);
 }
-?>
