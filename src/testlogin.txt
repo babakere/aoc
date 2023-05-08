@@ -1,0 +1,4 @@
+Test patient:
+
+email - john.doe@example.com
+password - patient123
