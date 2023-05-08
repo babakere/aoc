@@ -13,31 +13,31 @@ try {
 
 $data = json_decode(file_get_contents("php://input"));
 
-$errors = [];
+// $errors = [];
 
-if (empty($data->DoseNo)) {
-    $errors[] = "DoseNo is required.";
-}
+// if (empty($data->DoseNo)) {
+//     $errors[] = "DoseNo is required.";
+// }
 
-if (empty($data->VaccineManufacturer)) {
-    $errors[] = "VaccineManufacturer is required.";
-}
+// if (empty($data->VaccineManufacturer)) {
+//     $errors[] = "VaccineManufacturer is required.";
+// }
 
-if (empty($data->VaccineType)) {
-    $errors[] = "VaccineType is required.";
-}
+// if (empty($data->VaccineType)) {
+//     $errors[] = "VaccineType is required.";
+// }
 
-if (empty($data->VaccineBatchNumber)) {
-    $errors[] = "VaccineBatchNumber is required.";
-}
+// if (empty($data->VaccineBatchNumber)) {
+//     $errors[] = "VaccineBatchNumber is required.";
+// }
 
-if (empty($data->Booster)) {
-    $errors[] = "Booster is required.";
-}
+// if (empty($data->Booster)) {
+//     $errors[] = "Booster is required.";
+// }
 
-if (empty($data->NHSNumber)) {
-    $errors[] = "NHSNumber is required.";
-}
+// if (empty($data->NHSNumber)) {
+//     $errors[] = "NHSNumber is required.";
+// }
 
 if (empty($errors)) {
     $query = "INSERT INTO vaccines (DoseNo, VaccinationDate, VaccineManufacturer, DiseaseTargeted, VaccineType, Product, VaccineBatchNumber, CountryOfVaccination, Authority, Site, TotalSeriesOfDoses, DisplayName, SnomedCode, DateEntered, ProcedureCode, Booster, NHSNumber) VALUES (:doseNo, :vaccinationDate, :manufacturer, :diseaseTargeted, :vaccineType, :product, :batchNumber, :countryOfVaccination, :authority, :site, :totalSeriesOfDoses, :displayName, :snomedCode, :dateEntered, :procedureCode, :booster, :NHSNumber)";

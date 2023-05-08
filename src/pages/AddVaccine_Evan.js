@@ -1,13 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, ErrorText, H4, InputField } from "govuk-react";
 import { useNavigate } from "react-router-dom";
 
 function AddVaccine() {
   const [vaccine, setVaccine] = useState({});
-  const [patient, setPatient] = useState();
   const [fieldModified, setFieldModified] = useState({});
+  
   const navigate = useNavigate();
+useEffect(()=>{
+  const selectedPatient = JSON.parse(localStorage.getItem("selectedPatient")).NHSNumber
 
+setVaccine((previous)=>({...previous,["NHSNumber"]:selectedPatient}))
+},[])
   const handleChange = (key, value) => {
     setVaccine((prevVaccine) => ({ ...prevVaccine, [key]: value }));
     setFieldModified((prevFieldModified) => ({ ...prevFieldModified, [key]: true }));
@@ -15,9 +19,7 @@ function AddVaccine() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const selectedPatient = JSON.parse(localStorage.getItem("selectedPatient")).NHSNumber
-
-setVaccine((previous)=>({...previous,["NHSNumber"]:selectedPatient}))
+    
 console.log(vaccine)
     let isFalse = false;
     Object.keys(vaccine).forEach((data) => {
