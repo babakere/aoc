@@ -17,15 +17,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         try {
             $data = json_decode(file_get_contents("php://input"), true);
 
-            // Get the user with the provided email
-            $query = "SELECT Email as email, Password as password FROM Patient WHERE Email = :email";
+
+            $query = "SELECT Email as email, PatientID FROM Patient WHERE Email = :email AND Password = :password";
             $stmt = $pdo->prepare($query);
             $stmt->bindParam(':email', $data['email']);
+            $stmt->bindParam(':password', $data['password']);
+
             if ($stmt->execute()) {
                 $user = $stmt->fetch(PDO::FETCH_ASSOC);
-                if ($user && password_verify($data['password'], $user['password'])) { //this line does not work with verify password
+                if ($user) {
+                    echo json_encode(["user" =>  $user["email"], "type" => "patient","patientid"=> $user["PatientID"],"status" => "200"]);
 
-                    echo json_encode(["user" =>  $user["email"], "type" => "patient", "status" => "200"]);
                 } else {
                     $query = "SELECT Email as email, Password as password, StaffID FROM Staff WHERE Email = :email AND Password = :password";
                     $stmt = $pdo->prepare($query);

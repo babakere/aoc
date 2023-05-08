@@ -6,7 +6,8 @@ import Register from "./pages/register_imran";
 import PatientRecord from "./pages/patient_record_imran";
 import Info from "./info";
 import Login from "./pages/secondLogin_evan";
-import Patient from "./pages/patient_mo";
+import Patient from "./pages/addAppointment_mo";
+import Appointments from "./pages/cancelAndView_mo";
 
 
 
@@ -16,8 +17,12 @@ import Vaccine from "./pages/UpdateVaccine_Evan";
 import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
 import Doctor from "./pages/DoctorPage_evan";
 import View from "./pages/viewAppointment_evan";
+
+
 import DoctorPat from "./pages/docPatientRecord_evan";
 import Edit from "./pages/editPatientPage_evan";
+import RequestAppointment from "./pages/addAppointment_mo";
+
 
 import Header from "./header";
 
@@ -44,12 +49,35 @@ function App() {
               <Route path="/main" element={<Main />} />
               <Route path="/" element={<Navigate to="/main" />} />
 
-              <Route path="/loginselection" element={<LoginSelection />} />
-              <Route path="/login" element={<Login />} />
+
+      <Page  header={<Header></Header>}>
+        <Routes>
+          {/* Evans code */}
+          <Route path="/" element={<Info />} />
+          <Route path="/loginselection" element={<LoginSelection />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/main" element={<Main />} />
+          <Route path="/patient" element={<Patient />} />
+          <Route path="/requestAppointment" element={<RequestAppointment />} />
+          {/* cancelAndView */}
+          <Route path="/appointments" element={<Appointments />} />  
+          
+          <Route path="/deregister" element={<Deregister />} />
+          <Route path="/mainpage" element={< MainPage/>} />
+          <Route path="/register" element={<Register />} />
+
 
               <Route path="/patient" element={<Patient />} />
 
+
+          <Route path="/doctor" element={<Doctor/>} />
+          <Route path="/view" element={<View/>}/>
+
+          <Route path="/doctorPat" element={<DoctorPat/>}/>
+          <Route path="edit" element={<Edit />}/>
+
               <Route path="/deregister" element={<Deregister />} />
+
 
               <Route path="/register" element={<Register />} />
 
