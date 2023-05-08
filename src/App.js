@@ -8,14 +8,9 @@ import Info from "./info";
 import Login from "./pages/secondLogin_evan";
 import Patient from "./pages/patient_mo";
 
-
 import Vaccine from "./pages/UpdateVaccine";
 
-
-
-
-
-import {Routes,Route, useNavigate} from "react-router-dom";
+import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
 import Doctor from "./pages/DoctorPage_evan";
 import View from "./pages/viewAppointment_evan";
 import DoctorPat from "./pages/docPatientRecord_evan";
@@ -27,7 +22,6 @@ import LoginSelection from "./pages/loginpage_evan";
 
 import AddVaccine from "./pages/AddVaccine";
 
-
 import { createContext, useState } from "react";
 export const useContext = createContext();
 
@@ -38,17 +32,18 @@ function App() {
 
   return (
     <div className="App">
-
-
       <div className="pages">
         <useContext.Provider value={{ islogged, setIsLogged }}>
           <Page header={<Header></Header>}>
             <Routes>
               {/* Evans code */}
+
               <Route path="/main" element={<Main />} />
+              <Route path="/" element={<Navigate to="/main" />} />
+
               <Route path="/loginselection" element={<LoginSelection />} />
               <Route path="/login" element={<Login />} />
-             
+
               <Route path="/patient" element={<Patient />} />
 
               <Route path="/deregister" element={<Deregister />} />
@@ -63,9 +58,8 @@ function App() {
               <Route path="edit" element={<Edit />} />
               <Route path="/" element={<Info />} />
 
-
-          <Route path="/Vaccine" element={<Vaccine />}/>
-          <Route path="/AddVaccine" element={<AddVaccine />}/>
+              <Route path="/Vaccine" element={<Vaccine />} />
+              <Route path="/AddVaccine" element={<AddVaccine />} />
             </Routes>
           </Page>
         </useContext.Provider>

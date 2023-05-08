@@ -16,6 +16,10 @@ const Header = () => {
     <TopNav.NavLink href="main">Home</TopNav.NavLink>
   );
 
+  if (location.pathname === "/patientRecord") {
+    return <TopNav />;
+  }
+
   return (
     <TopNav
       company={
@@ -45,9 +49,7 @@ const Header = () => {
           </Button>
         </div>
       )}
-      {(location.pathname === "/login" ||
-        location.pathname === "/register" ||
-        location.pathname === "/patientRecord") &&
+      {(location.pathname === "/login" || location.pathname === "/register") &&
         renderHomeLink()}
       {location.pathname === "/patient" && (
         <>
