@@ -5,7 +5,7 @@ import Deregister from "./pages/deregister_ali";
 import Register from "./pages/register_imran";
 import PatientRecord from "./pages/patient_record_imran";
 import Info from "./info";
-import Login from "./pages/secondLogin_evan";
+import Login from "./pages/loginpage_evan";
 import Patient from "./pages/patient_mo";
 
 
