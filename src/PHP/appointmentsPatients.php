@@ -1,8 +1,9 @@
 <?php
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: *");
-header("Access-Control-Allow-Methods: *");
 header("Content-Type: application/json");
+
+
 
 try {
     $pdo = new PDO("sqlite:AOC.db");
@@ -14,18 +15,28 @@ try {
 
 $data = json_decode(file_get_contents("php://input"));
 
-if (!empty($data->appointmentDate) &&!empty($data->appointmentTime) && !empty($data->appointmentType) && !empty($data->appointmentLocation) ) {
-
-    $query = "INSERT INTO Appointment (AppointmentDate, AppointmentTime, TypeOfAppointment, AppointmentLocation) VALUES (:firstName, :lastName, :birthDate, :email, :address, :gender, :password, :nhsNumber)";
+if (
+    !empty($data->appointmentType) &&
+    !empty($data->AppointmentLocation) &&
+    !empty($data->AppointmentDate) &&
+    !empty($data->AppointmentTime) 
+ 
+    
+    
+  
+) {
+    $query = "INSERT INTO Appointment (AppointmentDate, AppointmentTime, TypeOfAppointment, AppointmentLocation) VALUES (:appointmentDate, :appointmentTime, :appointmentType, :appointmentLocation)";
 
     $stmt = $pdo->prepare($query);
-
-
-
-    $stmt->bindParam(':appointmentDate', $data->appointmentDate);
-    $stmt->bindParam(':appointmentTime', $data->appointmentTime);
+    // Hash the password before saving to the database
+    
+  
+    $stmt->bindParam(':appointmentDate', $data->AppointmentDate);
+    $stmt->bindParam(':appointmentTime', $data->AppointmentTime);
     $stmt->bindParam(':appointmentType', $data->appointmentType);
-    $stmt->bindParam(':AppointmentLocation', $data->appointmentLocation);
+    $stmt->bindParam(':appointmentLocation', $data->AppointmentLocation);
+    
+
 
 
     if ($stmt->execute()) {
@@ -33,10 +44,16 @@ if (!empty($data->appointmentDate) &&!empty($data->appointmentTime) && !empty($d
     } else {
         echo json_encode(["message" => "Unable to register user. Please try again."]);
     }
-
-
-
-
-}else {
+} else {
     echo json_encode(["message" => "Unable to register user. Data is incomplete."]);
 }
+
+
+?>
+
+
+
+
+
+
+
