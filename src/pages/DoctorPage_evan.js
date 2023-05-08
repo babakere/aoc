@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, H1, H3, Select } from "govuk-react";
 import { useNavigate } from "react-router-dom";
-import LogoutButton from "./logoutButton";
+
 function Doctor() {
   const navigate = useNavigate();
   const nav = (a) => {
@@ -12,7 +12,7 @@ function Doctor() {
       return(
         
         <div>
-         <LogoutButton></LogoutButton>
+         
             <H1>Welcome Doctor</H1>
             
             

@@ -19,10 +19,10 @@ console.log(num)
 
         setAppointments(data.Appointments)
         let dates = []
-        data.Appointments.map((appoinment)=>{
-          if(dates.includes(appoinment.AppointmentDate.toString())){
+        data.Appointments.map((appointment)=>{
+          if(dates.includes(appointment.AppointmentDate.toString())){
           }else{
-            dates.push(appoinment.AppointmentDate.toString())
+            dates.push(appointment.AppointmentDate.toString())
           }
          })
          
