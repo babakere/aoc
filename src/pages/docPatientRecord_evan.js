@@ -35,11 +35,17 @@ function DoctorPat() {
   }, []);
 
   const navigate = useNavigate();
+    // Save patient data in localStorage
+
   const nav = (a, patient) => {
-    navigate(a, { state: patient });
+    navigate(a, { state: patient }
+      );
+      localStorage.setItem("selectedPatient", JSON.stringify(patient));
   };
+
+
   return (
-    <div className="loginPage">
+    <div >
       {testData ? (
         <>
           <H2>View the Doctors Patients record page</H2>
@@ -58,6 +64,9 @@ function DoctorPat() {
 
                 <Table.Cell>
                   <Link onClick={() => nav("/edit", patient)}>Edit</Link>
+                </Table.Cell>
+                <Table.Cell>
+                <Link onClick={() => nav("/Vaccine", patient)}>Update Vaccine</Link>
                 </Table.Cell>
               </Table.Row>
             ))}

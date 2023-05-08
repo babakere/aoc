@@ -24,4 +24,3 @@ if ($table_check->fetch()) {
 }
 
 $conn = null;
-?>

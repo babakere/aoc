@@ -24,6 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($stmt->execute()) {
                 $user = $stmt->fetch(PDO::FETCH_ASSOC);
                 if ($user && password_verify($data['password'], $user['password'])) { //this line does not work with verify password
+
                     echo json_encode(["user" =>  $user["email"], "type" => "patient", "status" => "200"]);
                 } else {
                     $query = "SELECT Email as email, Password as password, StaffID FROM Staff WHERE Email = :email AND Password = :password";

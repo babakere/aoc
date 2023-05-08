@@ -56,32 +56,32 @@ console.log(patient)
     }
   };
  
-
+  const headersToInclude = ["Name", "Surname"];
 
   return (
     <>
       
-      <form className="loginPage" onSubmit={handleSubmit}>
-        {Object.entries(patient).map(([key, value]) => (
-            <React.Fragment key={key}>
-
-          <InputField
-            key={key}
-            label={key}
-            value={value}
-            type="text"
-            onChange={(e) => handleChange(key, e.target.value)}
-            >
-            {key}
-          </InputField>
-          {!value?(
-              
-              <ErrorText key={`${key}-error`}>{key} can't be empty</ErrorText>
-              ):null}
-
-              </React.Fragment>
-
-        ))}
+      <form  onSubmit={handleSubmit}>
+          {Object.entries(patient).map(([key, value]) => {
+            if (headersToInclude.includes(key)) {
+              return (
+                <React.Fragment key={key}>
+                  <InputField
+                    label={key}
+                    value={value}
+                    type="text"
+                    onChange={(e) => handleChange(key, e.target.value)}
+                  >
+                    {key}
+                  </InputField>
+                  {!value && (
+                    <ErrorText key={`${key}-error`}>{key} can't be empty</ErrorText>
+                  )}
+                </React.Fragment>
+              );
+            }
+            return null;
+          })}
         <Button className="Button" type="submit" onClick={handleSubmit}>
           Save
         </Button>
@@ -89,7 +89,7 @@ console.log(patient)
       </form>
     </>
   );
-  
+
 }
 
 export default Edit;

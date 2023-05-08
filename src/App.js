@@ -5,19 +5,27 @@ import Deregister from "./pages/deregister_ali";
 import Register from "./pages/register_imran";
 import PatientRecord from "./pages/patient_record_imran";
 import Info from "./info";
-import Login from "./pages/loginpage_evan";
+import Login from "./pages/secondLogin_evan";
 import Patient from "./pages/patient_mo";
 
-import { Routes, Route, useNavigate } from "react-router-dom";
+
+import Vaccine from "./pages/UpdateVaccine";
+
+
+
+
+
+import {Routes,Route, useNavigate} from "react-router-dom";
 import Doctor from "./pages/DoctorPage_evan";
 import View from "./pages/viewAppointment_evan";
-import Edit1 from "./pages/changeRecord_evan";
 import DoctorPat from "./pages/docPatientRecord_evan";
 import Edit from "./pages/editPatientPage_evan";
 
 import Header from "./header";
 
 import LoginSelection from "./pages/loginpage_evan";
+
+import AddVaccine from "./pages/AddVaccine";
 
 
 import { createContext, useState } from "react";
@@ -30,6 +38,8 @@ function App() {
 
   return (
     <div className="App">
+
+
       <div className="pages">
         <useContext.Provider value={{ islogged, setIsLogged }}>
           <Page header={<Header></Header>}>
@@ -49,13 +59,18 @@ function App() {
 
               <Route path="/doctor" element={<Doctor />} />
               <Route path="/view" element={<View />} />
-              <Route path="/edit1" element={<Edit1 />} />
               <Route path="/doctorPat" element={<DoctorPat />} />
               <Route path="edit" element={<Edit />} />
+              <Route path="/" element={<Info />} />
+
+
+          <Route path="/Vaccine" element={<Vaccine />}/>
+          <Route path="/AddVaccine" element={<AddVaccine />}/>
             </Routes>
           </Page>
         </useContext.Provider>
       </div>
+
       <Footer className="footer"></Footer>
     </div>
   );
