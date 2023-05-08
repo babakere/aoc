@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, ErrorText, H4, InputField } from "govuk-react";
+import { Button, ErrorText, H4, InputField, Label } from "govuk-react";
 import { useNavigate } from "react-router-dom";
 
 function AddVaccine() {
@@ -19,17 +19,23 @@ setVaccine((previous)=>({...previous,["NHSNumber"]:selectedPatient}))
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-console.log(vaccine)
-    let isFalse = false;
-    Object.keys(vaccine).forEach((data) => {
-      if (!vaccine[data]) {
-        isFalse = true;
-      }
-    });
+    const isFalse = Object.values(vaccine).some((value) => !value);
     if (isFalse) {
+      // Display an error message or take appropriate action
+      console.log("Please fill out all fields");
       return;
     }
+    
+// console.log(vaccine)
+//     let isFalse = false;
+//     Object.keys(vaccine).forEach((data) => {
+//       if (!vaccine[data]) {
+//         isFalse = true;
+//       }
+//     });
+//     if (isFalse) {
+//       return;
+//     }
 
     try {
         const response = await fetch("http://localhost:8000/Vaccines.php", {
@@ -43,7 +49,7 @@ console.log(vaccine)
         if (response.ok) {
           const result = await response.json();
           console.log(result);
-          // navigate("/doctor");
+          navigate("/doctor");
         } else {
           console.log("Response status", response.status);
           const errorResponse = await response.text();
@@ -81,7 +87,7 @@ console.log(vaccine)
         {headersToInclude.map((header) => (
           <React.Fragment key={header}>
             {header === "Booster" ? (
-              <div >
+              <div>
                 <label>{header}</label>
                 <div>
                   <input
@@ -103,6 +109,9 @@ console.log(vaccine)
                   />
                   <label htmlFor={`${header}-no`}>No</label>
                 </div>
+                {fieldModified[header] && !vaccine[header] && (
+                  <ErrorText>{`${header} can't be empty`}</ErrorText>
+                )}
               </div>
             ) : (
               <React.Fragment key={header}>
@@ -115,9 +124,7 @@ console.log(vaccine)
                   {header}
                 </InputField>
                 {fieldModified[header] && !vaccine[header] && (
-                  <ErrorText key={`${header}-error`}>
-                    {header} can't be empty
-                  </ErrorText>
+                  <ErrorText>{`${header} can't be empty`}</ErrorText>
                 )}
               </React.Fragment>
             )}
