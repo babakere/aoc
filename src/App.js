@@ -8,7 +8,10 @@ import Info from "./info";
 import Login from "./pages/secondLogin_evan";
 import Patient from "./pages/patient_mo";
 
-import Vaccine from "./pages/UpdateVaccine";
+
+
+import Vaccine from "./pages/UpdateVaccine_Evan";
+
 
 import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
 import Doctor from "./pages/DoctorPage_evan";
@@ -20,7 +23,7 @@ import Header from "./header";
 
 import LoginSelection from "./pages/loginpage_evan";
 
-import AddVaccine from "./pages/AddVaccine";
+import AddVaccine from "./pages/AddVaccine_Evan";
 
 import { createContext, useState } from "react";
 export const useContext = createContext();
