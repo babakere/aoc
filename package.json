@@ -15,9 +15,13 @@
     "jquery": "^3.6.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+<<<<<<< HEAD
 
     "react-router-dom": "^6.11.1",
 
+=======
+    "react-router-dom": "^6.11.0",
+>>>>>>> abf1a392b3c7efdc58051a2d373dbb9f7de95d9b
     "react-scripts": "^5.0.1"
   },
   "browserslist": {

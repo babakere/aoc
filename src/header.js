@@ -1,9 +1,15 @@
 import React from "react";
+<<<<<<< HEAD
 import { TopNav, Button } from "govuk-react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { SearchIcon } from "govuk-react";
 import LogoutButton from "./LogoutButton";
 
+=======
+import { TopNav } from "govuk-react";
+import { Link } from "govuk-react";
+import { useLocation } from "react-router-dom";
+>>>>>>> abf1a392b3c7efdc58051a2d373dbb9f7de95d9b
 const Header = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -18,16 +24,11 @@ const Header = () => {
 
   return (
     <TopNav
+
+
       company={
-        <TopNav.Anchor href="/main" target="new">
-          <TopNav.IconTitle icon={<SearchIcon height="32" width="36" />}>
-            GOV.UK
-          </TopNav.IconTitle>
-        </TopNav.Anchor>
-      }
-      serviceTitle={
         <TopNav.NavLink href="/main" target="new">
-          AOC Surgery
+          AOC
         </TopNav.NavLink>
       }
     >
@@ -51,10 +52,17 @@ const Header = () => {
         renderHomeLink()}
       {location.pathname === "/patient" && (
         <>
+<<<<<<< HEAD
           <Button onClick={() => handleButtonClick("/PatientRecord")}>
             Patient Record
           </Button>
           <LogoutButton />
+=======
+          <TopNav.NavLink href="about">About</TopNav.NavLink>
+          <TopNav.NavLink href="location">Location</TopNav.NavLink>
+          <TopNav.NavLink href="loginselection">Login</TopNav.NavLink>
+          <TopNav.NavLink href="register">Register</TopNav.NavLink>
+>>>>>>> abf1a392b3c7efdc58051a2d373dbb9f7de95d9b
         </>
       )}
       {location.pathname === "/doctor" && (

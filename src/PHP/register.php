@@ -4,7 +4,6 @@ header("Access-Control-Allow-Headers: *");
 header("Content-Type: application/json");
 
 
-
 try {
     $pdo = new PDO("sqlite:AOC.db");
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -42,7 +41,6 @@ if (
     $stmt->bindParam(':gender', $data->gender);
  $stmt->bindParam(':password', $hashedPassword); // Bind hashed password
     $stmt->bindParam(':nhsNumber', $data->nhsNumber);
-
 
 
 

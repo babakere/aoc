@@ -6,8 +6,13 @@ header("Content-Type: application/json");
 
 
 try {
+<<<<<<< HEAD:src/PHP/doctor.php
     $pdo = new PDO("sqlite:AOC.db");
     $pdo1 = new PDO("sqlite:vaccines.db");
+=======
+    $pdo = new PDO("sqlite:/Users/evan/Documents/AOCdatabase/AOC.db");
+    $pdo1 = new PDO("sqlite:/Users/evan/Documents/AOCdatabase/vaccines.db");
+>>>>>>> abf1a392b3c7efdc58051a2d373dbb9f7de95d9b:PHP/doctor.php
 
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {

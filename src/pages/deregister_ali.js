@@ -1,46 +1,52 @@
-import React, { useState, useEffect } from "react";
-import { Heading, Button, LoadingBox } from "govuk-react";
+import React from "react";
+// import ButtonToTop from "./backToTop";
+import { InputField, Button } from "govuk-react";
 
-function Deregister() {
-  const [loading, setLoading] = useState(false);
-  const [deregistered, setDeregistered] = useState(false);
+function deregister(){
+    // const handleAjax = () =>{
+    //     $.ajax({
+    //         type: "POST",
+    //         url: "http://localhost:8000/server.php",
+    //         data: { name: "wigfblrwihebfihewr" },
+    //         success(data) {
+    //             console.log(data);
+    //         },
+    //     });
+    // }
 
-  const handleDeregister = () => {
-    const email = localStorage.getItem("email");
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        
+    
+        
+        try {
+          const response = await fetch("http://localhost:8000/register.php", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(""),
+          });
+    
+          const result = await response.json();
+          alert(result.message);
+        } catch (error) {
+          console.error("Error:", error);
+        }
+      };
 
-    setLoading(true);
-    fetch(`http://localhost:8000/deregisterPatient.php?email=${email}`)
-      .then((response) => response.text())
-      .then((data) => {
-        console.log(data);
-        setDeregistered(true);
-      });
-  };
-
-  useEffect(() => {
-    if (deregistered) {
-      setTimeout(() => {
-        setLoading(false);
-        window.location.href = "/main";
-      }, 2000);
-    }
-  }, [deregistered]);
-
-  return (
-    <LoadingBox
-      loading={loading}
-      spinnerColor="#0b0c0c"
-      backgroundColor="#ffffff"
-      backgroundColorOpacity={0.85}
-      timeIn={800}
-      timeOut={200}
-    >
-      <div>
-        <Heading> Deregister page</Heading>
-        <Button onClick={handleDeregister}>Deregister</Button>
-      </div>
-    </LoadingBox>
-  );
+    
+    return(
+        <div>
+            <h1> De-Register page</h1>
+            <p>Please confirm your details to de-register
+            <br/>yourself from AOC Surgery
+            </p>
+ 
+            <Button className= "govuk-button" onClick={handleSubmit} data-module = "govuk-button"> De-register</Button>
+{/* <ButtonToTop>top</ButtonToTop> */}
+        </div>
+    );
 }
 
-export default Deregister;
+export default deregister;
