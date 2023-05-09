@@ -26,7 +26,7 @@ import Header from "./header";
 import LoginSelection from "./pages/loginpage_ali";
 
 import AddVaccine from "./pages/AddVaccine_Evan";
-
+import MainPage from "./pages/MainPage_ali";
 import { createContext, useState } from "react";
 export const useContext = createContext();
 
@@ -43,13 +43,13 @@ function App() {
             <Routes>
               {/* Evans code */}
 
-              <Route path="/main" element={<Main />} />
+              <Route path="/main" element={<MainPage />} />
               <Route path="/" element={<Navigate to="/main" />} />
 
               <Route path="/loginselection" element={<LoginSelection />} />
               <Route path="/login" element={<Login />} />
 
-              <Route path="/request" element={<Request />} />
+              <Route path="/patient" element={<Request />} />
 
               <Route path="/deregister" element={<Deregister />} />
 
