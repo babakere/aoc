@@ -1,7 +1,11 @@
+<!-- Authour: mahamed mahamud w1830373 -->
+
 <?php
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: *");
 header("Content-Type: application/json");
+
+
 
 try {
     $pdo = new PDO("sqlite:AOC.db");
@@ -10,8 +14,6 @@ try {
     echo json_encode(["message" => "Connection failed: " . $e->getMessage()]);
     exit();
 }
-
-
 
 $data = json_decode(file_get_contents("php://input"));
 
@@ -24,27 +26,31 @@ if (
 ) {
     
 
-    $query= "INSERT INTO Appointment (AppointmentRef, AppointmentDate, AppointmentTime, TypeOfAppointment, AppointmentLocation, StaffID, PatientID) 
-    VALUES (NULL, :appointmentDate, :appointmentTime, :appointmentType, :appointmentLocation, 2, 1)";
+    // $query= "INSERT INTO Appointment (AppointmentRef, AppointmentDate, AppointmentTime, TypeOfAppointment, AppointmentLocation, StaffID, PatientID) 
+    // VALUES (NULL, :appointmentDate, :appointmentTime, :AppointmentType, :appointmentLocation, 2, 1)";
+
+    // $query = "INSERT INTO Appointment (AppointmentRef, AppointmentDate, AppointmentTime, TypeOfAppointment, AppointmentLocation, StaffID, PatientID)
+    // VALUES (NULL, '2023-05-10', '10:30:00', 'Checkup', '123 Main St', 2, 3)";
+
+    $query = "INSERT INTO Appointment (AppointmentDate, AppointmentTime, TypeOfAppointment, AppointmentLocation, StaffID, PatientID, AppointmentRef)
+    VALUES (:appointmentDate, :appointmentTime, :AppointmentType, :appointmentLocation, 1, 1, NULL)";
+    
 
     $stmt = $pdo->prepare($query);
-  
     $stmt->bindParam(':appointmentDate', $data->AppointmentDate);
     $stmt->bindParam(':appointmentTime', $data->AppointmentTime);
-    $stmt->bindParam(':appointmentType', $data->appointmentType);
+    $stmt->bindParam(':AppointmentType', $data->appointmentType);
     $stmt->bindParam(':appointmentLocation', $data->AppointmentLocation);
     
     
-
-
-
     if ($stmt->execute()) {
-        echo json_encode(["message" => "User registered successfully."]);
+        echo json_encode(["message" => "Appointment successful."]);
     } else {
-        echo json_encode(["message" => "Unable to register user. Please try again."]);
+        echo json_encode(["message" => "Unable to book appointment. Please try again."]);
     }
+
 } else {
-    echo json_encode(["message" => "Unable to register user. Data is incomplete."]);
+    echo json_encode(["message" => "Unable to book appointment. Data is incomplete."]);
 }
 
 
