@@ -21,10 +21,10 @@ if (
     !empty($data->appointmentType) &&
     !empty($data->AppointmentLocation) &&
     !empty($data->AppointmentDate) &&
-    !empty($data->AppointmentTime) 
- 
+    !empty($data->AppointmentTime)
+
 ) {
-    
+
 
     // $query= "INSERT INTO Appointment (AppointmentRef, AppointmentDate, AppointmentTime, TypeOfAppointment, AppointmentLocation, StaffID, PatientID) 
     // VALUES (NULL, :appointmentDate, :appointmentTime, :AppointmentType, :appointmentLocation, 2, 1)";
@@ -34,31 +34,23 @@ if (
 
     $query = "INSERT INTO Appointment (AppointmentDate, AppointmentTime, TypeOfAppointment, AppointmentLocation, StaffID, PatientID, AppointmentRef)
     VALUES (:appointmentDate, :appointmentTime, :AppointmentType, :appointmentLocation, 1, 1, NULL)";
-    
+
 
     $stmt = $pdo->prepare($query);
     $stmt->bindParam(':appointmentDate', $data->AppointmentDate);
     $stmt->bindParam(':appointmentTime', $data->AppointmentTime);
     $stmt->bindParam(':AppointmentType', $data->appointmentType);
     $stmt->bindParam(':appointmentLocation', $data->AppointmentLocation);
-    
-    
+
+
     if ($stmt->execute()) {
         echo json_encode(["message" => "Appointment successful."]);
     } else {
         echo json_encode(["message" => "Unable to book appointment. Please try again."]);
     }
-
 } else {
     echo json_encode(["message" => "Unable to book appointment. Data is incomplete."]);
 }
 
 
 ?>
-
-
-
-
-
-
-
