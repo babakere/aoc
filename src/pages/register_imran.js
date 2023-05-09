@@ -1,3 +1,5 @@
+// author: Imran Feisal w1843601
+// Import required dependencies, components and hooks
 import React, { useState, useEffect } from "react";
 import InputField from "@govuk-react/input-field";
 import DateField from "@govuk-react/date-field";
@@ -11,7 +13,9 @@ import {
 } from "govuk-react";
 import { useNavigate } from "react-router-dom";
 
+// Define the Register component
 function Register() {
+  // Declare state variables for form input values and other component states
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [birthDate, setBirthDate] = useState("");
@@ -29,6 +33,7 @@ function Register() {
 
   const [dateInput, setDateInput] = useState({ day: "", month: "", year: "" });
 
+  // Update the birthDate state variable based on dateInput
   useEffect(() => {
     const { day, month, year } = dateInput;
     if (day && month && year) {
@@ -38,10 +43,12 @@ function Register() {
     }
   }, [dateInput]);
 
+  // Handle the change in date field input
   const handleDateFieldChange = (date) => {
     setDateInput(date);
   };
 
+  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = {
@@ -57,6 +64,7 @@ function Register() {
     };
     const newErrors = {};
 
+    // Validate form inputs and add errors if any
     if (!firstName) newErrors.firstName = "Complete First Name";
     if (!lastName) newErrors.lastName = "Complete Last Name";
     if (!birthDate) newErrors.birthDate = "Complete Birth Date";
@@ -89,12 +97,15 @@ function Register() {
     if (nhsNumber && isNaN(nhsNumber))
       newErrors.nhsNumber = "Invalid NHS Number";
 
+    // Check if there are any errors, and return if so
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
     }
 
     console.log("Form Data:", formData);
+
+    // Submit form data to the server-side script
     try {
       setLoading(true);
       const response = await fetch("http://localhost:8000/register.php", {
@@ -108,6 +119,7 @@ function Register() {
       const result = await response.json();
       alert(result.message);
 
+      // Show a success panel after registration and navigate to the main page
       setIsPanelVisible(true);
       setLoading(false);
 
@@ -121,6 +133,7 @@ function Register() {
     }
   };
 
+  // Render the registration form, loading box, and panel
   return (
     <div>
       <Heading>Register Page</Heading>
