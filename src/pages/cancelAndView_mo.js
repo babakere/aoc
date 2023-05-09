@@ -1,7 +1,13 @@
+//Authour: mahamed mahamud w1830373
+
 import React, { useState, useEffect } from 'react';
+import { Button, ErrorText, H4, InputField } from "govuk-react";
+import { useNavigate } from "react-router-dom";
+
 
 function Appointments() {
   const [appointments, setAppointments] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch('http://localhost:8000/showAppointments.php')
@@ -10,6 +16,7 @@ function Appointments() {
       .catch(error => console.error(error));
   }, []);
 
+  
   const cancelAppointment = (appointmentRef) => {
     fetch('http://localhost:8000/cancelAppointment.php', {
       method: 'POST',
@@ -22,7 +29,9 @@ function Appointments() {
     .then(data => console.log(data))
     .catch(error => console.error(error));
   }
-
+  const back = (a) => {
+    navigate(a);
+  }
   return (
     <div>
       <h1>Appointments</h1>
@@ -65,13 +74,15 @@ function Appointments() {
               <td></td>
               <td>
                 
-                <button onClick={() => cancelAppointment(appointment.AppointmentRef)}>Cancel</button>
+                <Button onClick={() => cancelAppointment(appointment.AppointmentRef)}>Cancel</Button>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
+      <Button className="Button" type="button" onClick={() => back(-1)}>Back</Button>
     </div>
+    
   );
 }
 
