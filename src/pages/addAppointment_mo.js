@@ -24,7 +24,7 @@ function Request() {
   useEffect(() => {
     const { day, month, year } = dateInput;
     if (day && month && year) {
-      setAppointmentDate(`${day}-${month}-${year}`);
+      setAppointmentDate(`${day}${month}${year}`);
     } else {
       setAppointmentDate("");
     }
