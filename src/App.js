@@ -6,7 +6,7 @@ import Deregister from "./pages/deregister_ali";
 import Register from "./pages/register_imran";
 import PatientRecord from "./pages/patient_record_imran";
 
-import Login from "./pages/secondLogin_evan";
+import Login from "./pages/secondLogin_ali";
 
 import Request from "./pages/addAppointment_mo";
 import Appointments from "./pages/cancelAndView_mo";
@@ -23,7 +23,7 @@ import Edit from "./pages/editPatientPage_evan";
 
 import Header from "./header";
 
-import LoginSelection from "./pages/loginpage_evan";
+import LoginSelection from "./pages/loginpage_ali";
 
 import AddVaccine from "./pages/AddVaccine_Evan";
 

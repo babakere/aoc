@@ -1,12 +1,18 @@
+// author: Imran Feisal w1843601
+// Import necessary React components and hooks
 import React, { useState, useEffect } from "react";
 import { Button, Heading, Table, Link, Input, BackLink } from "govuk-react";
 import { useNavigate } from "react-router-dom";
+
+// Define the PatientRecord component
 function PatientRecord() {
+  // Declare state variables
   const [patientDetails, setPatientDetails] = useState({});
   const [vaccineRecords, setVaccineRecords] = useState([]);
   const [editing, setEditing] = useState({});
   const navigate = useNavigate();
 
+  // Fetch patient details and vaccine records on component mount
   useEffect(() => {
     const email = localStorage.getItem("email");
 
@@ -31,6 +37,7 @@ function PatientRecord() {
       });
   }, []);
 
+  // Function to update patient details
   function updatePatientDetails(email, fieldName, fieldValue) {
     const updatedDetails = {
       ...patientDetails,
@@ -51,18 +58,22 @@ function PatientRecord() {
       });
   }
 
+  // Function to start editing a field
   const startEditing = (field) => {
     setEditing({ ...editing, [field]: true });
   };
 
+  // Function to stop editing a field
   const stopEditing = (field) => {
     setEditing({ ...editing, [field]: false });
   };
 
+  // Function to handle input changes for editable fields
   const handleInputChange = (event, field) => {
     setPatientDetails({ ...patientDetails, [field]: event.target.value });
   };
 
+  // Render the PatientRecord component
   return (
     <div>
       <BackLink href="#" onClick={() => navigate(-1)}>
