@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from "react";
+//Authour: mahamed mahamud w1830373
 
+import React, { useState, useEffect } from "react";
 import { Button, InputField, Checkbox,Table, H1, H3, DateField } from "govuk-react";
 import {Heading,Panel,LoadingBox,} from "govuk-react";
 import { useNavigate } from "react-router-dom";
 
 
 function Request() {
-  const email = localStorage.getItem("email");
+  
   
   const [appointmentType, setAppointmentType] = useState("");
   const [AppointmentLocation, setAppointmentLocation] = useState("");
@@ -16,8 +17,8 @@ function Request() {
   const [errors, setErrors] = useState({});
 
   const [isPanelVisible, setIsPanelVisible] = useState(false);
-  const navigate = useNavigate();
-
+  
+  //put date month and year values together
   const [dateInput, setDateInput] = useState({ day: "", month: "", year: "" });
 
   useEffect(() => {
@@ -65,7 +66,7 @@ function Request() {
         newErrors.AppointmentDate = "Invalid Appointment Date";
       }
     }
-    // Check if telNo and nhsNumber inputs are numbers only
+    // Check if Appointment Time inputs are numbers only
     if (AppointmentTime && isNaN(AppointmentTime)) newErrors.AppointmentTime = "Invalid Appointment Time";
     
 
@@ -93,15 +94,20 @@ function Request() {
 
       setTimeout(() => {
         setIsPanelVisible(false);
-        //navigate("/main");
+        
       }, 2000);
     } catch (error) {
       
       setLoading(false);
     }
   };
+  const navigate = useNavigate();
+  const goAppointments = (a) => {
+      navigate(a);
+  };
 
   return (
+    // retrive input and set to the variables that will be sent
     <div>
       <Heading>Request Appointment</Heading>
       <LoadingBox loading={loading} backgroundColorOpacity={0.85}>
@@ -147,6 +153,7 @@ function Request() {
           </form>
         )}
       </LoadingBox>
+      <Button onClick={() => goAppointments("/appointments")}>Veiw Appointments</Button>
       <div className = "reg-right" >
                      <H3> Symptom Checker </H3>
                      <Checkbox className="reg-right">Coughing</Checkbox>
@@ -162,10 +169,7 @@ function Request() {
                      <Checkbox className="reg-right">Diarrhea</Checkbox>
                     
      </div>
-     <div>
 
-        
-     </div>
       
     </div>
   );
