@@ -1,14 +1,17 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import "../ali.css";
+
 import { Button, LeadParagraph, InputField, ErrorText, Paragraph,H5, Heading, H1, H2, OrderedList, ListItem,} from "govuk-react";
+
 import { useState } from "react";
-import picture1 from "../images/1.jpg"
-import picture2 from "../images/2.jpg"
-import picture4 from "../images/4.jpg"
-import picture9 from "../images/9.jpg"
-import picture10 from "../images/10.jpg"
-import picture11 from "../images/11.jpg"
-import picture12 from "../images/12.png"
+import picture1 from "../images/1.jpg";
+import picture2 from "../images/2.jpg";
+import picture4 from "../images/4.jpg";
+import picture9 from "../images/9.jpg";
+import picture10 from "../images/10.jpg";
+import picture11 from "../images/11.jpg";
+import picture12 from "../images/12.png";
 
 
 
@@ -16,11 +19,16 @@ function MainPage() {  {/*This line defines a function component named MainPage*
 
 {/*These lines use the useState hook to create state variables for the component.
   The variables are phone, fullname, message, email, and submitted, and their initial values are empty strings or false.*/}
+
   const [phone, setPhone] = useState("");
   const [fullname, setFullname] = useState("");
   const [message, setMessage] = useState("");
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const navigate = useNavigate();
+  const handleButtonClick = (route) => {
+    navigate(route);
+  };
 
   {/*This line defines a function named handleSubmit that will be called when the form is submitted.*/}
   const handleSubmit = (e) => {  
@@ -31,13 +39,14 @@ function MainPage() {  {/*This line defines a function component named MainPage*
       !message &&
       !email ) {   {/*If none of the form fields have been filled out, nothing happens.*/}
      
+
     } else {
       // Handle form submission here
       console.log("Form submitted");
     }
-
   };
   return (
+
     <div className="main-page" >
      <LeadParagraph className="par">
 
@@ -102,24 +111,38 @@ function MainPage() {  {/*This line defines a function component named MainPage*
           </p>        
         </div>
       <Heading size="L">Testimonials</Heading>  {/*This is the testimonials part*/}
+
         <div className="feedback">
           <div className="box1">
             <H5>Testemonial-1</H5>
-          <p>"A wonderful GP practice, the best I've ever been registered with in UK.<br></br>
-              Supportive and proactive doctor, excellent nurses and that rarity: kind and effiecent...."</p>
+            <p>
+              "A wonderful GP practice, the best I've ever been registered with
+              in UK.<br></br>
+              Supportive and proactive doctor, excellent nurses and that rarity:
+              kind and effiecent...."
+            </p>
           </div>
+
           <div className="box1">  {/*the css have been applied to make the paragraph nice*/}
           <H5>Testemonial-2</H5>
           <p>"Good experience with friendly receptionst and doctor. "</p>
+
           </div>
           <div className="box1">
-          <H5>Testemonial-3</H5>
-          <p>"I love the surgery and the staff are not given enough respect<br/>
-              so they're always  professional plus proficient.<br/>  
-              Try to answer calls and patients at the same time then you will understand the process.<br/>
-              Keep up the good work and thank  you for giving me what I need"</p>
+            <H5>Testemonial-3</H5>
+            <p>
+              "I love the surgery and the staff are not given enough respect
+              <br />
+              so they're always professional plus proficient.
+              <br />
+              Try to answer calls and patients at the same time then you will
+              understand the process.
+              <br />
+              Keep up the good work and thank you for giving me what I need"
+            </p>
           </div>
         </div>
+
       
     
         <Heading>Blog</Heading>
@@ -171,6 +194,7 @@ function MainPage() {  {/*This line defines a function component named MainPage*
         <Button buttonShadowColour="#f49938">
         <a href="#ok">Back To Top</a>
         </Button>
+
 
     </div>
   );

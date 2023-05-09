@@ -1,25 +1,32 @@
+// Import required dependencies and components
 import React from "react";
 import { TopNav, Button } from "govuk-react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { SearchIcon } from "govuk-react";
 import LogoutButton from "./LogoutButton";
 
+// Define the Header component
 const Header = () => {
+  // Get the current location and navigate functions from React Router
   const location = useLocation();
   const navigate = useNavigate();
 
+  // Handle button click events for navigation
   const handleButtonClick = (route) => {
     navigate(route);
   };
 
+  // Render the Home link
   const renderHomeLink = () => (
     <TopNav.NavLink href="main">Home</TopNav.NavLink>
   );
 
+  // If the current location is "/patientRecord", only render an empty top navigation bar
   if (location.pathname === "/patientRecord") {
     return <TopNav />;
   }
 
+  // Render the top navigation bar with appropriate navigation links and buttons based on the current location
   return (
     <TopNav
       company={
@@ -37,7 +44,9 @@ const Header = () => {
     >
       {location.pathname === "/main" && (
         <div style={{ width: "200%" }}>
-          <Button onClick={() => handleButtonClick("/login")}>Login</Button>
+          <Button onClick={() => handleButtonClick("/loginselection")}>
+            Login
+          </Button>
           <Button
             onClick={() => handleButtonClick("/register")}
             buttonColour="#f3f2f1"

@@ -1,0 +1,12 @@
+Test patient:
+
+email - john.doe@example.com
+password - patient123
+
+Test Doctor: 
+oliver.brown@example.com
+staff123
+
+
+Test Admin:
+N/A

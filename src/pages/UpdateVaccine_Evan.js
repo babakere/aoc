@@ -1,3 +1,4 @@
+// Author: Evan Babaker W1633664
 import React, { useState, useEffect } from "react";
 import { Button, Heading, Table } from "govuk-react";
 import { useNavigate } from "react-router-dom";
@@ -6,8 +7,8 @@ function Vaccine() {
   const [patientDetails, setPatientDetails] = useState({});
   const [vaccineRecords, setVaccineRecords] = useState([]);
 
-
   useEffect(() => {
+    // Retrieve the selected patient from local storage
     const selectedPatient = JSON.parse(localStorage.getItem("selectedPatient"));
     setPatientDetails(selectedPatient);
 
@@ -26,14 +27,13 @@ function Vaccine() {
   }, []);
 
   const navigate = useNavigate();
-  const nav = (a) => {
-    navigate(a);
+
+  // Function to navigate to the specified route
+  const navigateTo = (route) => {
+    navigate(route);
   };
 
-
-
-
-
+  // Define the headers to include in the patient details table
   const headersToInclude = [
     "Name",
     "Surname",
@@ -41,7 +41,6 @@ function Vaccine() {
     "PersonDB",
     "Address",
     "Gender",
-   
     "NHSNumber",
   ];
 
@@ -50,6 +49,7 @@ function Vaccine() {
       <Heading>Patient Vaccine Record</Heading>
 
       <Table>
+        {/* Render patient details in a table */}
         {headersToInclude.map((head, index) => (
           <Table.Row key={index}>
             <Table.CellHeader>{head}</Table.CellHeader>
@@ -58,9 +58,11 @@ function Vaccine() {
         ))}
       </Table>
 
-      <Button onClick={() => nav("/AddVaccine")}>Add Vaccine</Button>
+      {/* Button to navigate to the "AddVaccine" page */}
+      <Button onClick={() => navigateTo("/AddVaccine")}>Add Vaccine</Button>
 
       <Table>
+        {/* Render vaccine records in a table */}
         {vaccineRecords.map((record, index) => (
           <React.Fragment key={index}>
             <Table.Row>
@@ -70,6 +72,7 @@ function Vaccine() {
             </Table.Row>
             <Table.Row>
               <Table.Cell>
+                {/* Display vaccine record details */}
                 {`${record.DoseNo} ${record.VaccineManufacturer} ${
                   record.VaccineType
                 } ${record.VaccineBatchNumber} ${
@@ -81,7 +84,8 @@ function Vaccine() {
         ))}
       </Table>
 
-      <Button className="Button" type="button" onClick={() => nav(-1)}>
+      {/* Button to navigate back to the previous page */}
+      <Button className="Button" type="button" onClick={() => navigateTo(-1)}>
         Back
       </Button>
     </div>
